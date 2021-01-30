@@ -59,6 +59,17 @@ public class WanderingSpirit : MonoBehaviour {
         }
     }
 
+    public void SetForgetPlayer (float time) { // forgets the player (or any follow target) for x seconds
+        SetFollowTarget (null);
+        if (followPlayer) {
+            CancelInvoke ("FollowPlayer");
+            Invoke ("FollowPlayer", time);
+        }
+    }
+    void FollowPlayer () {
+        SetFollowTarget (GameManager.instance.Player.transform);
+    }
+
     // Update is called once per frame
     void Update () {
         if (randomWander && (currentFollowTarget == null || Vector3.Distance (currentFollowTarget.position, transform.position) > followDistance)) {

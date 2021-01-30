@@ -182,7 +182,7 @@ public class InventoryController : MonoBehaviour {
                 };
                 // and finally actually add them, with randomized stack sizes!
                 foreach (RandomizedInventoryItem item in itemsToAdd) {
-                    int randomStackSize = Random.Range (item.randomStackSize.x, item.randomStackSize.y);
+                    int randomStackSize = Mathf.Clamp (Random.Range (item.randomStackSize.x, item.randomStackSize.y), 0, item.data.m_maxStackSize);
                     if (randomStackSize > 0 && item.data != null) { // This setup allows for null datas, which can empty out slots!
                         AddItem (item.data, randomStackSize);
                     };

@@ -43,6 +43,9 @@ public class Interactable_Object : MonoBehaviour {
     public float condition = 1f;
 
     public ObjectActivatedEvent activateObjectEvent;
+    public ObjectActivatedEvent openedObjectEvent;
+    public ObjectActivatedEvent talkObjectEvent;
+    public ObjectActivatedEvent sitObjectEvent;
     public ObjectActivatedEvent deactivateObjectEvent;
     // Start is called before the first frame update
     void Start () {
@@ -339,7 +342,7 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.ACTIVATE:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.ACTIVATE);
                         break;
                     }
                 case Interactions.DEACTIVATE:
@@ -349,7 +352,7 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.OPEN:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.OPEN);
                         break;
                     }
                 case Interactions.CLOSE:
@@ -359,12 +362,12 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.TALK:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.TALK);
                         break;
                     }
                 case Interactions.SIT:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.SIT);
                         break;
                     }
             }
@@ -398,17 +401,37 @@ public class Interactable_Object : MonoBehaviour {
         };
     }
 
-    void ActivateAction (BasicAgent agent) {
-        if (!active) {
-            if (interactions.Contains (Interactions.DEACTIVATE) || interactions.Contains (Interactions.CLOSE)) { // We only set this if we need to follow it
-                active = true;
-            };
-            activateObjectEvent.Invoke (this, agent);
-            agent.ActivateAction (activateActionTrigger, 0.5f, true);
-            if (activateKnotName != "") {
-                InkWriter.main.GoToKnot (activateKnotName);
-            }
+    void ActivateAction (BasicAgent agent, Interactions type) {
+        if ((type == Interactions.ACTIVATE && interactions.Contains (Interactions.DEACTIVATE)) || (type == Interactions.OPEN && interactions.Contains (Interactions.CLOSE))) { // We only set this if we need to follow it
+            active = true;
         };
+        switch (type) {
+            case Interactions.ACTIVATE:
+                {
+                    activateObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.TALK:
+                {
+                    talkObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.OPEN:
+                {
+                    openedObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.SIT:
+                {
+                    sitObjectEvent.Invoke (this, agent);
+                    break;
+                }
+        }
+
+        agent.ActivateAction (activateActionTrigger, 0.5f, true);
+        if (activateKnotName != "") {
+            InkWriter.main.GoToKnot (activateKnotName);
+        }
     }
 
     void DeactivateAction (BasicAgent agent) {

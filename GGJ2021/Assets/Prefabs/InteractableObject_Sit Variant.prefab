@@ -179,12 +179,12 @@ PrefabInstance:
     - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
       propertyPath: activateObjectEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
       propertyPath: deactivateObjectEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
@@ -224,6 +224,26 @@ PrefabInstance:
     - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
       propertyPath: activateObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: deactivateObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 598473922}
+    - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: deactivateObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InteractableObjectActivate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: deactivateObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: deactivateObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630905762982594697, guid: b662f0387aec01047841ce7c287fe423,
@@ -289,7 +309,7 @@ PrefabInstance:
     - target: {fileID: 5630905762982594736, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
       propertyPath: m_Name
-      value: InteractableObject_Sit
+      value: InteractableObject_Sit Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5630905762982594737, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
