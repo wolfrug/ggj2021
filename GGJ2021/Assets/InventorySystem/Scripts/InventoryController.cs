@@ -579,6 +579,11 @@ public class InventoryController : MonoBehaviour {
                 case InventoryType.CRAFTING:
                     {
                         GameEventMessage.SendEvent ("ShowCraftingInventory");
+                        if (craftingController != null) {
+                            craftingController.Active = true;
+                        } else {
+                            Debug.LogWarning ("Inventory set to 'crafting' has null crafting-controller!");
+                        };
                         break;
                     }
                 default:
@@ -605,6 +610,9 @@ public class InventoryController : MonoBehaviour {
             };
             m_isActive = false;
             stackManipulator.Active = false;
+            if (craftingController != null) {
+                craftingController.Active = false;
+            };
             inventoryClosedEvent.Invoke (this);
         };
     }
