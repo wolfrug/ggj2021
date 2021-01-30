@@ -15,6 +15,7 @@ public enum Interactions {
     ACTIVATE = 3000,
     OPEN = 3100, // alt to activate
     TALK = 3200, // alt to activate
+    SIT = 3300, // alt to activate
     DEACTIVATE = 4000,
     CLOSE = 4100, // alt to deactivate
 }
@@ -32,6 +33,7 @@ public class Interactable_Object : MonoBehaviour {
     public string deactivateActionTrigger = "Interact";
     public float activateDistance = 1f;
 
+    public bool canBeCarried = true;
     public bool interactableWhileCarried = false;
     public GameObject self;
     public Rigidbody rb;
@@ -151,6 +153,14 @@ public class Interactable_Object : MonoBehaviour {
                         };
                         break;
                     }
+                case Interactions.SIT:
+                    {
+                        // If there is no close, we can just keep activating
+                        if (!IsCarried () || interactableWhileCarried) {
+                            returnList.Add (ContextMenuEntryType.SIT);
+                        };
+                        break;
+                    }
                 case Interactions.CLOSE:
                     {
                         if (active) {
@@ -205,6 +215,11 @@ public class Interactable_Object : MonoBehaviour {
             case ContextMenuEntryType.TALK: // alts
                 {
                     returnInteraction = Interactions.TALK;
+                    break;
+                }
+            case ContextMenuEntryType.SIT: // alts
+                {
+                    returnInteraction = Interactions.SIT;
                     break;
                 }
         }
@@ -294,6 +309,16 @@ public class Interactable_Object : MonoBehaviour {
                             }
                             break;
                         }
+                    case Interactions.SIT:
+                        {
+                            // Activate actions
+                            if (Vector3.Distance (GameManager.instance.Player.transform.position, transform.position) <= activateDistance) {
+                                Interact (GameManager.instance.Player, Interactions.SIT);
+                            } else {
+                                GameManager.instance.Player.StartAutoTask (this, ContextMenuEntryType.SIT, true);
+                            }
+                            break;
+                        }
                 }
             }
         }
@@ -333,6 +358,11 @@ public class Interactable_Object : MonoBehaviour {
                         break;
                     }
                 case Interactions.TALK:
+                    {
+                        ActivateAction (agent);
+                        break;
+                    }
+                case Interactions.SIT:
                     {
                         ActivateAction (agent);
                         break;
@@ -389,13 +419,15 @@ public class Interactable_Object : MonoBehaviour {
         };
     }
     bool IsCarried (bool byPlayer = true) {
-        if (transform.parent != null) {
-            if (transform.parent.root == GameManager.instance.Player.transform && byPlayer) {
-                return true;
-            } else {
-                return true;
+        if (canBeCarried) {
+            if (transform.parent != null) {
+                if (transform.parent.root == GameManager.instance.Player.transform && byPlayer) {
+                    return true;
+                } else {
+                    return true;
+                }
             }
-        }
+        };
         return false;
     }
 

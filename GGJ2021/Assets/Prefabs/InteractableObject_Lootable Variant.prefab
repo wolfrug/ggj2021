@@ -1115,22 +1115,22 @@ PrefabInstance:
     - target: {fileID: 7423135035895461815, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7423135035895461815, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7423135035895461815, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7423135035895461815, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7667001546353772951, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
@@ -1196,6 +1196,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354148811913089927, guid: 5443a7594ef384d4aa2fd11e40f5993f,
+        type: 3}
+      propertyPath: BehaviorAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354148811913089927, guid: 5443a7594ef384d4aa2fd11e40f5993f,
+        type: 3}
+      propertyPath: ViewName
+      value: Generic
       objectReference: {fileID: 0}
     - target: {fileID: 8505334615542558092, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
@@ -1592,6 +1602,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InteractableObject_Lootable Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630905762982594736, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5630905763878367085, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}

@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour {
     }
     void OpenInventory (InventoryController otherInventory) {
         SetState (GameStates.INVENTORY);
-        // Debug.Log ("Inventory opened " + otherInventory.gameObject);
+        Debug.Log ("Inventory opened " + otherInventory.gameObject);
         if (otherInventory.type == InventoryType.LOOTABLE || otherInventory.type == InventoryType.CRAFTING) { // auto-open player inventory when opening lootable container
             playerInventory.Visible = true;
         }

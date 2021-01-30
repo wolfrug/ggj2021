@@ -37,8 +37,8 @@ public class InventoryController : MonoBehaviour {
     public Inventory_StackManipulator stackManipulator;
     public InventoryContextMenuController contextMenuController;
     public InventoryCraftingController craftingController;
-
     public Inventory_ConsumeWatcher consumeWatcher;
+    public GameObject tooltipCanvas;
     public Item_DragTarget mainDragTarget;
     public int maxSlots = 99;
     public bool isDragging = false;
@@ -239,6 +239,9 @@ public class InventoryController : MonoBehaviour {
             newBox.targetBox.SetItemBoxData (itemdata);
             newBox.targetBox.StackSize = stackAmount;
             newBox.gameObject.name = itemdata.m_displayName + "_InventoryItem";
+            if (tooltipCanvas != null) {
+                newBox.targetBox.tooltip.spawnedTooltip = tooltipCanvas;
+            }
             return AddItemBox (newBox);
         } else {
             return false;
@@ -567,7 +570,10 @@ public class InventoryController : MonoBehaviour {
                     }
                 case InventoryType.LOOTABLE:
                     {
-                        GameEventMessage.SendEvent ("ShowLootableInventory");
+                        //GameEventMessage.SendEvent ("ShowLootingInventory");
+                        canvasGroup.interactable = true;
+                        canvasGroup.alpha = 1f;
+                        canvasGroup.blocksRaycasts = true;
                         break;
                     }
                 case InventoryType.CRAFTING:
@@ -592,6 +598,11 @@ public class InventoryController : MonoBehaviour {
             //canvasGroup.interactable = false;
             //canvasGroup.alpha = 0f;
             //canvasGroup.blocksRaycasts = false;
+            if (type == InventoryType.LOOTABLE) {
+                canvasGroup.interactable = false;
+                canvasGroup.alpha = 0f;
+                canvasGroup.blocksRaycasts = false;
+            };
             m_isActive = false;
             stackManipulator.Active = false;
             inventoryClosedEvent.Invoke (this);
