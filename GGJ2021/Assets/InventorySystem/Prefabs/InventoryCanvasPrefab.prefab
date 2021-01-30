@@ -1326,8 +1326,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Submit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1675,8 +1676,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Combine
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2118,8 +2120,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2365,10 +2368,10 @@ MonoBehaviour:
         Elasticity: 1
         NumberOfLoops: -1
         LoopType: 1
-        Direction: 0
+        Direction: 2
         CustomPosition: {x: 0, y: 0, z: 0}
         EaseType: 0
-        Ease: 17
+        Ease: 27
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -2430,12 +2433,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.4
+        Duration: 0.3
       Rotate:
         AnimationType: 2
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
-        To: {x: 0, y: 0, z: 30}
+        To: {x: 90, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
@@ -2444,7 +2447,7 @@ MonoBehaviour:
         LoopType: 1
         RotateMode: 0
         EaseType: 0
-        Ease: 7
+        Ease: 26
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -2520,7 +2523,7 @@ MonoBehaviour:
         AnimationType: 2
         Enabled: 1
         From: {x: 0, y: 0, z: 0}
-        To: {x: 0, y: 1, z: 1}
+        To: {x: 0.5, y: 0.5, z: 1}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
@@ -2528,7 +2531,7 @@ MonoBehaviour:
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
-        Ease: 18
+        Ease: 29
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -2580,8 +2583,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 0.4
+        StartDelay: 0.2
+        Duration: 0.2
       Fade:
         AnimationType: 2
         Enabled: 0
@@ -2644,8 +2647,8 @@ MonoBehaviour:
         SoundName: No Sound
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Scale
-    PresetName: SlenderLeft
+    PresetCategory: Slide
+    PresetName: RushToTop
   HideProgressor: {fileID: 0}
   LoopBehavior:
     Animation:
@@ -2801,7 +2804,7 @@ MonoBehaviour:
         Elasticity: 1
         NumberOfLoops: -1
         LoopType: 1
-        Direction: 0
+        Direction: 2
         CustomPosition: {x: 0, y: 0, z: 0}
         EaseType: 0
         Ease: 18
@@ -2857,11 +2860,11 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.6
+        Duration: 0.4
       Rotate:
         AnimationType: 1
         Enabled: 0
-        From: {x: 0, y: 0, z: -30}
+        From: {x: 0, y: 0, z: 15}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
@@ -2871,76 +2874,76 @@ MonoBehaviour:
         LoopType: 1
         RotateMode: 0
         EaseType: 0
-        Ease: 7
+        Ease: 27
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0
-            inSlope: 0.8317713
-            outSlope: 0.8317713
+            value: 0.0051574707
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.086447984
-            value: 0.3852525
-            inSlope: -4.0340276
-            outSlope: -4.0340276
+            time: 0.048303347
+            value: 0.28854316
+            inSlope: 7.8732495
+            outSlope: 7.8732495
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.15024436
-            value: -0.16880007
-            inSlope: 2.6790874
-            outSlope: 2.6790874
+            time: 0.10184101
+            value: -0.07756907
+            inSlope: 3.7581615
+            outSlope: 3.7581615
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.31475198
-            value: 0.63001835
-            inSlope: 1.654774
-            outSlope: 1.654774
+            time: 0.1691427
+            value: 0.5604678
+            inSlope: 5.091666
+            outSlope: 5.091666
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.65320194
-            value: -0.3455999
-            inSlope: 2.2644703
-            outSlope: 2.2644703
+            time: 0.6416942
+            value: -0.5875959
+            inSlope: 1.8110614
+            outSlope: 1.8110614
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.86005604
-            value: 0.59935784
-            inSlope: -8.202301
-            outSlope: -8.202301
+            time: 0.9733818
+            value: 0.67883307
+            inSlope: -4.2502594
+            outSlope: -4.2502594
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.98112845
-            value: 0.78519994
-            inSlope: -1.8837628
-            outSlope: -1.8837628
+            time: 0.98996425
+            value: 0.88832426
+            inSlope: -2.3853254
+            outSlope: -2.3853254
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
-            value: 1
+            value: 1.0051575
             inSlope: 2
             outSlope: 2
             tangentMode: 0
@@ -2950,12 +2953,12 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
+        StartDelay: 0.3
         Duration: 0.45
       Scale:
         AnimationType: 1
         Enabled: 1
-        From: {x: 0, y: 1, z: 1}
+        From: {x: 0, y: 0, z: 1}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
@@ -2964,7 +2967,7 @@ MonoBehaviour:
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
-        Ease: 17
+        Ease: 27
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -3017,7 +3020,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.2
+        Duration: 0.8
       Fade:
         AnimationType: 1
         Enabled: 0
@@ -3035,7 +3038,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
+        StartDelay: 0.2
         Duration: 0.2
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -3080,8 +3083,8 @@ MonoBehaviour:
         SoundName: No Sound
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Scale
-    PresetName: SlenderLeft
+    PresetCategory: Slide
+    PresetName: CardDown
   ShowProgressor: {fileID: 0}
   TargetOrientation: 2
   UpdateHideProgressorOnShow: 0
@@ -3395,8 +3398,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 (1) 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6379,8 +6383,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Inventory
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6698,8 +6703,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 999/999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6854,8 +6860,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select amount
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3, type: 2}
+  m_sharedMaterial: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9864,12 +9871,12 @@ PrefabInstance:
     - target: {fileID: 9170829412812296569, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.7234085
       objectReference: {fileID: 0}
     - target: {fileID: 9170829412812296569, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9170829413011995302, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
@@ -10064,7 +10071,7 @@ PrefabInstance:
     - target: {fileID: 9170829413698331496, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 9170829413698331496, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
@@ -10146,6 +10153,12 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 9170829414527193072, guid: cd21899d8e52bfd4ca77315dbf368e20,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1599161696598443990, guid: af8e98bf3730edd42b0bc2b3b1a3a1d3,
+        type: 2}
     - target: {fileID: 9170829414713960446, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}
       propertyPath: m_Sprite

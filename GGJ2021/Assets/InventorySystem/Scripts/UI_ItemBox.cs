@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_ItemBox : MonoBehaviour {
     public ItemData data;
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI amountText;
     public Image itemImage;
@@ -49,11 +50,13 @@ public class UI_ItemBox : MonoBehaviour {
         if (data != null) {
             descriptionText.text = string.Format (data.m_descriptionTextFormat, data.m_description, data.m_displayName, StackSize, data.m_maxStackSize);
             itemImage.sprite = data.m_image;
+            nameText.text = data.m_displayName;
             ParseItemData ();
             highlight = true;
         } else {
             itemImage.sprite = null;
             descriptionText.text = "";
+            nameText.text = "";
             tooltip.IsActive = false;
             SetDraggable (false);
             highlight = false;
