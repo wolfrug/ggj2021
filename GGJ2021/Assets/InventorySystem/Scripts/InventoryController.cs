@@ -37,8 +37,8 @@ public class InventoryController : MonoBehaviour {
     public Inventory_StackManipulator stackManipulator;
     public InventoryContextMenuController contextMenuController;
     public InventoryCraftingController craftingController;
-
     public Inventory_ConsumeWatcher consumeWatcher;
+    public GameObject tooltipCanvas;
     public Item_DragTarget mainDragTarget;
     public int maxSlots = 99;
     public bool isDragging = false;
@@ -182,7 +182,7 @@ public class InventoryController : MonoBehaviour {
                 };
                 // and finally actually add them, with randomized stack sizes!
                 foreach (RandomizedInventoryItem item in itemsToAdd) {
-                    int randomStackSize = Random.Range (item.randomStackSize.x, item.randomStackSize.y);
+                    int randomStackSize = Mathf.Clamp (Random.Range (item.randomStackSize.x, item.randomStackSize.y), 0, item.data.m_maxStackSize);
                     if (randomStackSize > 0 && item.data != null) { // This setup allows for null datas, which can empty out slots!
                         AddItem (item.data, randomStackSize);
                     };
@@ -233,12 +233,18 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
+    public void TryAddItem (ItemData itemData) {
+        AddItem (itemData);
+    }
     public bool AddItem (ItemData itemdata, int stackAmount = 1) { // add a box based on data, must spawn
         if (maxSlots >= allItemBoxes.Count) {
             Item_DragAndDrop newBox = SpawnBox (itemdata);
             newBox.targetBox.SetItemBoxData (itemdata);
             newBox.targetBox.StackSize = stackAmount;
             newBox.gameObject.name = itemdata.m_displayName + "_InventoryItem";
+            if (tooltipCanvas != null) {
+                newBox.targetBox.tooltip.spawnedTooltip = tooltipCanvas;
+            }
             return AddItemBox (newBox);
         } else {
             return false;
@@ -335,7 +341,10 @@ public class InventoryController : MonoBehaviour {
                 clicked = 0;
                 clicktime = 0;
                 contextMenuController.ForceSelectOption (ContextMenuEntryType.UI_DROP, target.gameObject.GetComponent<UI_ItemBox> ());
-            } else if (clicked > 2 || Time.time - clicktime > 1) clicked = 0;
+            } else if (clicked > 2 || Time.time - clicktime > 1) { clicked = 0; };
+            if (contextMenuController != null) {
+                contextMenuController.SelectItem (target.gameObject.GetComponent<UI_ItemBox> ()); // no let's not do this
+            }
         }
     }
 
@@ -343,6 +352,7 @@ public class InventoryController : MonoBehaviour {
         isDragging = true;
         // Debug.Log ("Started drag");
         target.transform.SetAsLastSibling ();
+        contextMenuController.Cancel ();
         mainCanvas.sortingOrder = 999;
     }
     void OnDragEnd (Item_DragAndDrop target) {
@@ -401,9 +411,11 @@ public class InventoryController : MonoBehaviour {
         if (targetItem != null) {
             if (draggedItem.targetBox.data == targetItem.targetBox.data) {
                 if (targetItem.targetBox.StackSize < targetItem.targetBox.data.m_maxStackSize) { // there's space!
-                    stackManipulator.StartManipulator (draggedItem, targetItem);
-                    return true;
-                };
+                    if (stackManipulator.CheckCompatibility (draggedItem)) {
+                        stackManipulator.StartManipulator (draggedItem, targetItem);
+                        return true;
+                    };
+                }
             } else {
                 //      Debug.Log ("Internal combination failed: incompatible data");
             }
@@ -418,8 +430,10 @@ public class InventoryController : MonoBehaviour {
         if (SpaceLeft > 0 || targetItem != null) {
             // Dragged item is external; if it has a stack size, let's let the player pick how much is dropped
             if (draggedItem.targetBox.StackSize > 1 || (draggedItem.targetBox.StackSize == 1 && targetItem != null)) {
-                stackManipulator.StartManipulator (draggedItem, targetItem);
-                return true;
+                if (stackManipulator.CheckCompatibility (draggedItem)) {
+                    stackManipulator.StartManipulator (draggedItem, targetItem);
+                    return true;
+                }
             }
         }
         return false;
@@ -440,7 +454,7 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
-    void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
+    public void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
         InventoryController targetObjectParent = item.GetComponentInParent<InventoryController> ();
         if (targetObjectParent == null) { // No parent? Floating magical lonely boy. Oh well, yoink.
             AddItemBox (item);
@@ -567,12 +581,20 @@ public class InventoryController : MonoBehaviour {
                     }
                 case InventoryType.LOOTABLE:
                     {
-                        GameEventMessage.SendEvent ("ShowLootableInventory");
+                        //GameEventMessage.SendEvent ("ShowLootingInventory");
+                        canvasGroup.interactable = true;
+                        canvasGroup.alpha = 1f;
+                        canvasGroup.blocksRaycasts = true;
                         break;
                     }
                 case InventoryType.CRAFTING:
                     {
                         GameEventMessage.SendEvent ("ShowCraftingInventory");
+                        if (craftingController != null) {
+                            craftingController.Active = true;
+                        } else {
+                            Debug.LogWarning ("Inventory set to 'crafting' has null crafting-controller!");
+                        };
                         break;
                     }
                 default:
@@ -592,8 +614,16 @@ public class InventoryController : MonoBehaviour {
             //canvasGroup.interactable = false;
             //canvasGroup.alpha = 0f;
             //canvasGroup.blocksRaycasts = false;
+            if (type == InventoryType.LOOTABLE) {
+                canvasGroup.interactable = false;
+                canvasGroup.alpha = 0f;
+                canvasGroup.blocksRaycasts = false;
+            };
             m_isActive = false;
             stackManipulator.Active = false;
+            if (craftingController != null) {
+                craftingController.Active = false;
+            };
             inventoryClosedEvent.Invoke (this);
         };
     }

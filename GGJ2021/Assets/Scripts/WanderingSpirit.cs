@@ -9,6 +9,13 @@ public enum SpiritType {
 public class WanderingSpirit : MonoBehaviour {
     public BasicAgent targetAgent;
     public SpiritType type;
+    public DamageType damageType = DamageType.NONE;
+    public float damageAmount = -0.01f;
+    public float damageTime = 5f;
+
+    [Tooltip ("Only relevant for non-aura damage types")]
+    public float damageInterval = 5f;
+    private float lastDamageTime = 0f;
     public Transform currentFollowTarget;
     public float followDistance = 20f;
     public bool randomWander = true;
@@ -32,6 +39,35 @@ public class WanderingSpirit : MonoBehaviour {
     }
     public void SetWanderCenter (Transform center) {
         randomWanderCenter = center;
+    }
+
+    public void StartAuraDamage () {
+        string selfName = type.ToString () + gameObject.name; // if you name a number of critters the same thing, the aura won't stack!
+        if (!SurvivalManager.instance.HasPermanentEffect (selfName)) {
+            SurvivalManager.instance.StartPermanentEffect (damageType, damageAmount, damageTime, selfName);
+        };
+    }
+    public void StopAuraDamage () {
+        string selfName = type.ToString () + gameObject.name;
+        SurvivalManager.instance.StopPermanentEffect (selfName);
+    }
+
+    public void DoSingleDamage () {
+        if (lastDamageTime < damageInterval + Time.time) {
+            SurvivalManager.instance.SpawnHealthEffect (damageType, damageAmount, damageTime);
+            lastDamageTime = Time.time;
+        }
+    }
+
+    public void SetForgetPlayer (float time) { // forgets the player (or any follow target) for x seconds
+        SetFollowTarget (null);
+        if (followPlayer) {
+            CancelInvoke ("FollowPlayer");
+            Invoke ("FollowPlayer", time);
+        }
+    }
+    void FollowPlayer () {
+        SetFollowTarget (GameManager.instance.Player.transform);
     }
 
     // Update is called once per frame

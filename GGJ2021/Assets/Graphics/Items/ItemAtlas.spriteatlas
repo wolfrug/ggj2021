@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ItemAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d4edd38919236a840808dd48a5ced95c, type: 3}
+    totalSpriteSurfaceArea: 33989660
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 9a71a3002123e18429dae9393154eedf, type: 3}
+  - {fileID: 21300000, guid: 469d0320c7ceebe409a8fb452bbaa36c, type: 3}
+  - {fileID: 21300000, guid: 81aed23094255864a8f628304e1f6da1, type: 3}
+  - {fileID: 21300000, guid: ac5d18a0f3ca2d54fad50a0d9ae5385b, type: 3}
+  - {fileID: 21300000, guid: ef78c441dd0744b4398dce30eec2df78, type: 3}
+  - {fileID: 21300000, guid: 393b1f61a9b0e624c97cf5b130805c15, type: 3}
+  - {fileID: 21300000, guid: bf599bc1e18423a48ad69c2346f43acc, type: 3}
+  - {fileID: 21300000, guid: 257cdbc38adef0444ab269f965af95ce, type: 3}
+  - {fileID: 21300000, guid: f5da44141ad889b46be356a23786250e, type: 3}
+  - {fileID: 21300000, guid: 2c493024457553841888ec4ce8234d4d, type: 3}
+  - {fileID: 21300000, guid: f0c258059e183cf42b55f63fb886aa31, type: 3}
+  - {fileID: 21300000, guid: 44f87e55ab9a9ce4c8acbb18c92865ae, type: 3}
+  - {fileID: 21300000, guid: 936acbb5fdefb3742994a1467b793a01, type: 3}
+  - {fileID: 21300000, guid: 9bb9a036556c29343bdce18ea838e542, type: 3}
+  - {fileID: 21300000, guid: 2ea1bc47b6bf13245b33ea4bc2ffd43f, type: 3}
+  - {fileID: 21300000, guid: 914f06575dd5ddf4dba5fd4da939ebd8, type: 3}
+  - {fileID: 21300000, guid: 077665a78bf7b274386071ebc67c2c8f, type: 3}
+  - {fileID: 21300000, guid: 27eec9581769c0144b08a0eeae2bb4a2, type: 3}
+  - {fileID: 21300000, guid: 96d5d89ade8d9624fb2e803075f470fe, type: 3}
+  - {fileID: 21300000, guid: 13699aca592c2044abb67ae3cf08d029, type: 3}
+  - {fileID: 21300000, guid: 7ce363ea7a30b824798f4fab38c53b36, type: 3}
+  - {fileID: 21300000, guid: 0fb8552b6c487a147a81ceb6e1ece5d0, type: 3}
+  - {fileID: 21300000, guid: b18575db22a2f5d4194d19d13147d76d, type: 3}
+  - {fileID: 21300000, guid: 5231f1fd17201ba4e85c98f8e99a0c38, type: 3}
+  - {fileID: 21300000, guid: 1cecb12efbeedb441990ab6ee9c09339, type: 3}
+  - {fileID: 21300000, guid: df17863e774b58648b9b61e70fdcd0de, type: 3}
+  - {fileID: 21300000, guid: 52ef379ef8d643b49b87220e8fb3c504, type: 3}
+  - {fileID: 21300000, guid: 00028cdeacd2b734f8a44e8d65ba14aa, type: 3}
+  - {fileID: 21300000, guid: c637856fc23330f4f8e16f0dd86a558b, type: 3}
+  - {fileID: 21300000, guid: 1202d5af83e2836469ae4abe9ed002df, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Item-Candle
+  - Pearl
+  - Item-Mushroom
+  - Item-Tape
+  - Item-Knife
+  - Item-Wood
+  - Item-Sugar
+  - Item-Ribbon
+  - Item-Pipe
+  - Item-Honey
+  - Item-Witchbells
+  - Item-Photograph
+  - Item-Scissors
+  - Item-Rotten Tuna
+  - Item-Battery
+  - Item-Box
+  - Item-Flashlight - Off
+  - Item-Empty Can
+  - Item-Doll
+  - Item-Scissors-Rusted
+  - Item-Lavender
+  - Item-Flashlight - On
+  - Item-Bottle Empty
+  - Item-Twigs
+  - Item-Scarf
+  - Item-Full Can
+  - Item-Bottle Full
+  - Item-Tea
+  - Item-Music Box
+  - Item-Gum
+  m_Tag: ItemAtlas
+  m_IsVariant: 0

@@ -36,7 +36,9 @@ public class BasicAgent : MonoBehaviour {
         Sequence pickUpSequence = DOTween.Sequence ();
         pickUpSequence.AppendInterval (duration);
         pickUpSequence.AppendCallback (() => navMeshAgent.isStopped = false);
-        animator.SetTrigger (animation);
+        if (animation != "") {
+            animator.SetTrigger (animation);
+        }
     }
 
     public void CancelAutoTask () {
@@ -45,7 +47,7 @@ public class BasicAgent : MonoBehaviour {
         };
     }
     public void StartAutoTask (Interactable_Object instigator, ContextMenuEntryType action, bool dropCarried = true) {
-   //     Debug.Log ("Starting auto-task walk");
+        //     Debug.Log ("Starting auto-task walk");
         if (carrying && dropCarried) {
             carriedObject.Interact (this, Interactions.DROP);
         }
@@ -57,16 +59,16 @@ public class BasicAgent : MonoBehaviour {
 
         Debug.Log ("Distance to target: " + Vector3.Distance (navMeshAgent.destination, target.position));
         while (Vector3.Distance (transform.position, target.position) > activateDistance) {
-//            Debug.Log ("Waiting to reach target, remaining distance: " + Vector3.Distance (transform.position, target.position));
+            //            Debug.Log ("Waiting to reach target, remaining distance: " + Vector3.Distance (transform.position, target.position));
             yield return new WaitForSeconds (0.1f);
             if (!navMeshAgent.hasPath) {
                 Debug.Log ("Navmesh agent has no path, cancelling");
                 break;
             }
         }
- //       Debug.Log ("Reached destination or cancelled");
+        //       Debug.Log ("Reached destination or cancelled");
         if (Vector3.Distance (target.position, transform.position) <= activateDistance) {
- //           Debug.Log ("Attempting pick-up!");
+            //           Debug.Log ("Attempting pick-up!");
             callback.Invoke ();
         } else {
             Debug.Log ("Failed to invoke carry walk due to distance (" + Vector3.Distance (target.position, transform.position) + ")");

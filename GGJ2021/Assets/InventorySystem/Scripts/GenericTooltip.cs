@@ -31,6 +31,7 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
     private Transform targetMoveTransform;
     public TooltipActivated tooltipOpenedEvent;
     public TooltipActivated tooltipClosedEvent;
+    public bool destroySelfAutomatically = true;
     Vector3 min, max;
     private RectTransform rect;
     private EventTrigger eventTrigger;
@@ -52,10 +53,13 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
             if (tooltipPrefab != null) {
                 spawnedTooltip = Instantiate (tooltipPrefab, tooltipCanvasParent.transform, false);
                 // Are we a canvas? If so, set us to SUPER HIGH and fuck being parented
-                Canvas getCanvas = spawnedTooltip.GetComponentInParent<Canvas> ();
+                Canvas getCanvas = spawnedTooltip.GetComponent<Canvas> ();
                 if (getCanvas != null) {
                     getCanvas.sortingOrder = 99;
-                    spawnedTooltip.transform.parent = null;
+                    spawnedTooltip.transform.SetParent (null);
+                    spawnedTooltip.transform.position = Vector3.zero;
+                    spawnedTooltip.transform.localScale = new Vector3 (1f, 1f, 1f);
+                    //spawnedTooltip.transform.SetParent (tooltipCanvasParent.transform, true);
                     targetMoveTransform = spawnedTooltip.transform.GetChild (0);
                 } else {
                     targetMoveTransform = spawnedTooltip.transform;
@@ -168,6 +172,11 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
             //clamp it to the screen size so it doesn't go outside
             targetMoveTransform.position = position;
             //targetMoveTransform.position = new Vector3 (Mathf.Clamp (position.x, min.x + rect.rect.width / 2, max.x - rect.rect.width / 2), Mathf.Clamp (position.y, min.y + rect.rect.height / 2, max.y - rect.rect.height / 2), position.z);
+        }
+    }
+    void OnDestroy () {
+        if (destroySelfAutomatically) {
+            Destroy (spawnedTooltip);
         }
     }
 }

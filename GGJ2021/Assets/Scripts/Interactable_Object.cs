@@ -15,6 +15,7 @@ public enum Interactions {
     ACTIVATE = 3000,
     OPEN = 3100, // alt to activate
     TALK = 3200, // alt to activate
+    SIT = 3300, // alt to activate
     DEACTIVATE = 4000,
     CLOSE = 4100, // alt to deactivate
 }
@@ -32,6 +33,7 @@ public class Interactable_Object : MonoBehaviour {
     public string deactivateActionTrigger = "Interact";
     public float activateDistance = 1f;
 
+    public bool canBeCarried = true;
     public bool interactableWhileCarried = false;
     public GameObject self;
     public Rigidbody rb;
@@ -41,6 +43,9 @@ public class Interactable_Object : MonoBehaviour {
     public float condition = 1f;
 
     public ObjectActivatedEvent activateObjectEvent;
+    public ObjectActivatedEvent openedObjectEvent;
+    public ObjectActivatedEvent talkObjectEvent;
+    public ObjectActivatedEvent sitObjectEvent;
     public ObjectActivatedEvent deactivateObjectEvent;
     // Start is called before the first frame update
     void Start () {
@@ -151,6 +156,14 @@ public class Interactable_Object : MonoBehaviour {
                         };
                         break;
                     }
+                case Interactions.SIT:
+                    {
+                        // If there is no close, we can just keep activating
+                        if (!IsCarried () || interactableWhileCarried) {
+                            returnList.Add (ContextMenuEntryType.SIT);
+                        };
+                        break;
+                    }
                 case Interactions.CLOSE:
                     {
                         if (active) {
@@ -205,6 +218,11 @@ public class Interactable_Object : MonoBehaviour {
             case ContextMenuEntryType.TALK: // alts
                 {
                     returnInteraction = Interactions.TALK;
+                    break;
+                }
+            case ContextMenuEntryType.SIT: // alts
+                {
+                    returnInteraction = Interactions.SIT;
                     break;
                 }
         }
@@ -294,6 +312,16 @@ public class Interactable_Object : MonoBehaviour {
                             }
                             break;
                         }
+                    case Interactions.SIT:
+                        {
+                            // Activate actions
+                            if (Vector3.Distance (GameManager.instance.Player.transform.position, transform.position) <= activateDistance) {
+                                Interact (GameManager.instance.Player, Interactions.SIT);
+                            } else {
+                                GameManager.instance.Player.StartAutoTask (this, ContextMenuEntryType.SIT, true);
+                            }
+                            break;
+                        }
                 }
             }
         }
@@ -314,7 +342,7 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.ACTIVATE:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.ACTIVATE);
                         break;
                     }
                 case Interactions.DEACTIVATE:
@@ -324,7 +352,7 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.OPEN:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.OPEN);
                         break;
                     }
                 case Interactions.CLOSE:
@@ -334,7 +362,12 @@ public class Interactable_Object : MonoBehaviour {
                     }
                 case Interactions.TALK:
                     {
-                        ActivateAction (agent);
+                        ActivateAction (agent, Interactions.TALK);
+                        break;
+                    }
+                case Interactions.SIT:
+                    {
+                        ActivateAction (agent, Interactions.SIT);
                         break;
                     }
             }
@@ -368,17 +401,37 @@ public class Interactable_Object : MonoBehaviour {
         };
     }
 
-    void ActivateAction (BasicAgent agent) {
-        if (!active) {
-            if (interactions.Contains (Interactions.DEACTIVATE) || interactions.Contains (Interactions.CLOSE)) { // We only set this if we need to follow it
-                active = true;
-            };
-            activateObjectEvent.Invoke (this, agent);
-            agent.ActivateAction (activateActionTrigger, 0.5f, true);
-            if (activateKnotName != "") {
-                InkWriter.main.GoToKnot (activateKnotName);
-            }
+    void ActivateAction (BasicAgent agent, Interactions type) {
+        if ((type == Interactions.ACTIVATE && interactions.Contains (Interactions.DEACTIVATE)) || (type == Interactions.OPEN && interactions.Contains (Interactions.CLOSE))) { // We only set this if we need to follow it
+            active = true;
         };
+        switch (type) {
+            case Interactions.ACTIVATE:
+                {
+                    activateObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.TALK:
+                {
+                    talkObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.OPEN:
+                {
+                    openedObjectEvent.Invoke (this, agent);
+                    break;
+                }
+            case Interactions.SIT:
+                {
+                    sitObjectEvent.Invoke (this, agent);
+                    break;
+                }
+        }
+
+        agent.ActivateAction (activateActionTrigger, 0.5f, true);
+        if (activateKnotName != "") {
+            InkWriter.main.GoToKnot (activateKnotName);
+        }
     }
 
     void DeactivateAction (BasicAgent agent) {
@@ -389,13 +442,15 @@ public class Interactable_Object : MonoBehaviour {
         };
     }
     bool IsCarried (bool byPlayer = true) {
-        if (transform.parent != null) {
-            if (transform.parent.root == GameManager.instance.Player.transform && byPlayer) {
-                return true;
-            } else {
-                return true;
+        if (canBeCarried) {
+            if (transform.parent != null) {
+                if (transform.parent.root == GameManager.instance.Player.transform && byPlayer) {
+                    return true;
+                } else {
+                    return true;
+                }
             }
-        }
+        };
         return false;
     }
 

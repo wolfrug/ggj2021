@@ -459,7 +459,7 @@ MonoBehaviour:
   amountText: {fileID: 7396655746122901095}
   itemImage: {fileID: 8802080753308395816}
   tooltip: {fileID: 8802080752378620602}
-  dragTarget: {fileID: 0}
+  dragTarget: {fileID: 4278517476647287916}
   animator: {fileID: 7943782042475931826}
   draggable: 1
   highlight: 1
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac9939d5ac734642a27099dc8597a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveToMousePosition: 1
+  moveToMousePosition: 0
   waitTime: 0.5
   tooltiptextPath: 
   tooltiptext: Test
@@ -513,7 +513,8 @@ MonoBehaviour:
   tooltipClosedEvent:
     m_PersistentCalls:
       m_Calls: []
-  y_offset: 0
+  destroySelfAutomatically: 1
+  offset: {x: 0, y: 15}
 --- !u!114 &4278517476647287916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,7 +909,8 @@ MonoBehaviour:
   tooltipClosedEvent:
     m_PersistentCalls:
       m_Calls: []
-  y_offset: 10
+  destroySelfAutomatically: 1
+  offset: {x: 0, y: 15}
 --- !u!1 &8802080753308395822
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e15b3ccbb930ed244ba21ab0559f0c6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df17863e774b58648b9b61e70fdcd0de, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

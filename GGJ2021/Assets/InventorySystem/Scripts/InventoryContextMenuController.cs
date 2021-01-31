@@ -58,6 +58,10 @@ public class InventoryContextMenuController : MonoBehaviour {
         }
     }
 
+    public void Cancel () {
+        contextMenu.ShowMenu (false);
+    }
+
     public void SelectOption (ContextMenuEntryType actionType, GameObject target) {
         Debug.Log ("Selected the option " + actionType);
         Item_DragAndDrop tryItem = target.GetComponentInParent<Item_DragAndDrop> ();

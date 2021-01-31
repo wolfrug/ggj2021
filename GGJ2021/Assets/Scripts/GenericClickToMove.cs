@@ -88,7 +88,7 @@ public class GenericClickToMove : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (active) {
+        if (active && GameManager.instance.GameState == GameStates.GAME) {
             if (Input.GetAxis ("Fire1") > 0f) {
                 // Moving by clicking left
                 CastRay ();

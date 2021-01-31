@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour {
     public GenericClickToMove mover;
     public InventoryController playerInventory;
 
+    public Transform respawnLocation;
+
+    private List<WanderingSpirit> allSpirits = new List<WanderingSpirit> { };
+
     void Awake () {
         if (instance == null) {
             instance = this;
@@ -56,6 +60,15 @@ public class GameManager : MonoBehaviour {
     }
     public void Init () {
         NextState ();
+    }
+
+    public List<WanderingSpirit> Spirits {
+        get {
+            if (allSpirits.Count == 0) {
+                allSpirits.AddRange (FindObjectsOfType<WanderingSpirit> ());
+            }
+            return allSpirits;
+        }
     }
 
     void Late_Init () {
@@ -92,20 +105,41 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void WinGame () {
+    public void WinGame () {
         GameState = GameStates.WIN;
         Debug.Log ("Victory!!");
-        //SceneManager.LoadScene("WinScene");
+        SceneManager.LoadScene ("WinScene");
     }
-    public void Defeat (Resources reason) {
-        Debug.Log ("LOST BECAUSE OF " + reason);
+    public void Defeat () {
+
         currentState = gameStateDict[GameStates.DEFEAT];
         currentState.evtStart.Invoke (currentState);
     }
+
+    public void Respawn () {
+        player.navMeshAgent.Warp (respawnLocation.position);
+        foreach (WanderingSpirit spirit in Spirits) {
+            if (spirit.randomWanderCenter != null) {
+                spirit.transform.position = spirit.randomWanderCenter.position;
+            } else { // place them in zero I dunno man
+                spirit.transform.position = Vector3.zero;
+            }
+            spirit.SetFollowTarget (null);
+        }
+        SurvivalManager.instance.ResetMeters ();
+        SetState (GameStates.GAME);
+    }
+
     public void Restart () {
         Time.timeScale = 1f;
         SceneManager.LoadScene (SceneManager.GetActiveScene ().name, LoadSceneMode.Single);
     }
+
+    public void DualLoadScenes () {
+        SceneManager.LoadScene ("ManagersScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene ("SA_Demo", LoadSceneMode.Additive);
+    }
+
     public void BackToMenu () {
         Time.timeScale = 1f;
         SceneManager.LoadScene ("MainMenu");
@@ -151,7 +185,7 @@ public class GameManager : MonoBehaviour {
     }
     void OpenInventory (InventoryController otherInventory) {
         SetState (GameStates.INVENTORY);
-        // Debug.Log ("Inventory opened " + otherInventory.gameObject);
+        Debug.Log ("Inventory opened " + otherInventory.gameObject);
         if (otherInventory.type == InventoryType.LOOTABLE || otherInventory.type == InventoryType.CRAFTING) { // auto-open player inventory when opening lootable container
             playerInventory.Visible = true;
         }
@@ -165,6 +199,12 @@ public class GameManager : MonoBehaviour {
         if (otherInventory.type == InventoryType.PLAYER) {
             InventoryController.CloseAllInventories (InventoryType.LOOTABLE);
             InventoryController.CloseAllInventories (InventoryType.CRAFTING);
+        }
+    }
+
+    public void OpenJournal () {
+        if (!InkWriter.main.writerVisible) {
+            InkWriter.main.GoToKnot ("OpenJournalExt");
         }
     }
 
@@ -208,6 +248,19 @@ public class GameManager : MonoBehaviour {
         if (!playerInventory.DestroyItemAmount (data, amount)) {
             Debug.LogWarning ("Failed to destroy the required amount of item " + m_id + "(" + m_id + ")");
         }
+    }
+
+    public void HealPlayerHealth (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.HEALTH, 0.01f, amount);
+    }
+    public void HealPlayerMental (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.MENTAL, 0.01f, amount);
+    }
+    public void HurtPlayerHealth (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.HEALTH, -0.01f, amount);
+    }
+    public void HurtPlayerMental (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.MENTAL, -0.01f, amount);
     }
 
     public BasicAgent Player {
