@@ -17,7 +17,8 @@ public class StartMenuScript : MonoBehaviour {
         }
     }
     public void StartGame () {
-        SceneManager.LoadScene (sceneToLoadOnStart);
+        SceneManager.LoadScene ("ManagersScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene (sceneToLoadOnStart, LoadSceneMode.Additive);
     }
     public void ResetAll () {
         ES3.DeleteKey ("LDJam47_HasSaved");

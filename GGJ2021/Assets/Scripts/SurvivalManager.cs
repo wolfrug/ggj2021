@@ -28,7 +28,8 @@ public class HealthMeter {
     public bool isEmpty = false;
     [Tooltip ("Set to false to be a 'empty once, die forever' type of thing")]
     public bool canBeImproved = true;
-    public GameObject survivalEffectPrefab;
+    public GameObject survivalEffectPrefab_Plus;
+    public GameObject survivalEffectPrefab_Minus;
     public Transform survivalEffectParent;
     public HealthBarEmpty emptyEvent;
     public HealthBarChanged changedEvent;
@@ -103,8 +104,12 @@ public class SurvivalManager : MonoBehaviour {
         if (targetMeter != null) {
             GameObject survivalEffect = defaultSurvivalEffectPrefab;
             Transform effectParent = defaultSurvivalEffectParent;
-            if (targetMeter.survivalEffectPrefab != null) {
-                survivalEffect = targetMeter.survivalEffectPrefab;
+            if (dps >= 0f) {
+                if (targetMeter.survivalEffectPrefab_Plus != null) {
+                    survivalEffect = targetMeter.survivalEffectPrefab_Plus;
+                }
+            } else if (targetMeter.survivalEffectPrefab_Minus != null) {
+                survivalEffect = targetMeter.survivalEffectPrefab_Minus; { }
             }
             if (targetMeter.survivalEffectParent != null) {
                 effectParent = targetMeter.survivalEffectParent;

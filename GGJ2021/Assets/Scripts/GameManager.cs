@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour {
     public GenericClickToMove mover;
     public InventoryController playerInventory;
 
+    public Transform respawnLocation;
+
+    private List<WanderingSpirit> allSpirits = new List<WanderingSpirit> { };
+
     void Awake () {
         if (instance == null) {
             instance = this;
@@ -56,6 +60,15 @@ public class GameManager : MonoBehaviour {
     }
     public void Init () {
         NextState ();
+    }
+
+    public List<WanderingSpirit> Spirits {
+        get {
+            if (allSpirits.Count == 0) {
+                allSpirits.AddRange (FindObjectsOfType<WanderingSpirit> ());
+            }
+            return allSpirits;
+        }
     }
 
     void Late_Init () {
@@ -97,15 +110,26 @@ public class GameManager : MonoBehaviour {
         Debug.Log ("Victory!!");
         //SceneManager.LoadScene("WinScene");
     }
-    public void Defeat (Resources reason) {
-        Debug.Log ("LOST BECAUSE OF " + reason);
+    public void Defeat () {
+
         currentState = gameStateDict[GameStates.DEFEAT];
         currentState.evtStart.Invoke (currentState);
     }
+
+    public void Respawn () {
+        player.navMeshAgent.Warp (respawnLocation.position);
+    }
+
     public void Restart () {
         Time.timeScale = 1f;
         SceneManager.LoadScene (SceneManager.GetActiveScene ().name, LoadSceneMode.Single);
     }
+
+    public void DualLoadScenes () {
+        SceneManager.LoadScene ("ManagersScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene ("SA_Demo", LoadSceneMode.Additive);
+    }
+
     public void BackToMenu () {
         Time.timeScale = 1f;
         SceneManager.LoadScene ("MainMenu");
