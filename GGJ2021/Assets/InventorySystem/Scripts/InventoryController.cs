@@ -233,6 +233,9 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
+    public void TryAddItem (ItemData itemData) {
+        AddItem (itemData);
+    }
     public bool AddItem (ItemData itemdata, int stackAmount = 1) { // add a box based on data, must spawn
         if (maxSlots >= allItemBoxes.Count) {
             Item_DragAndDrop newBox = SpawnBox (itemdata);

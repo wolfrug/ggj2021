@@ -197,6 +197,26 @@ public class SurvivalManager : MonoBehaviour {
         return true;
     }
 
+    public void ResetMeters () {
+
+        List<string> effectList = new List<string> { };
+        foreach (KeyValuePair<string, SurvivalEffect> kvp in permanentEffects) {
+            effectList.Add (kvp.Key);
+        }
+        foreach (string id in effectList) {
+            StopPermanentEffect (id);
+        }
+
+        foreach (SurvivalEffect effect in currentEffects) {
+            effect.StopAllCoroutines ();
+            Destroy (effect.gameObject);
+        }
+        foreach (KeyValuePair<DamageType, HealthMeter> kvp in healthMeters) {
+            kvp.Value.targetHealthbar.currentHealth = kvp.Value.targetHealthbar.minMaxHealth.y;
+            kvp.Value.isEmpty = false;
+        }
+    }
+
     [NaughtyAttributes.Button]
     void TestDamage () {
         SpawnHealthEffect (DamageType.HEALTH, -0.1f, 1f);

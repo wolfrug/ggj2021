@@ -118,6 +118,16 @@ public class GameManager : MonoBehaviour {
 
     public void Respawn () {
         player.navMeshAgent.Warp (respawnLocation.position);
+        foreach (WanderingSpirit spirit in Spirits) {
+            if (spirit.randomWanderCenter != null) {
+                spirit.transform.position = spirit.randomWanderCenter.position;
+            } else { // place them in zero I dunno man
+                spirit.transform.position = Vector3.zero;
+            }
+            spirit.SetFollowTarget (null);
+        }
+        SurvivalManager.instance.ResetMeters ();
+        SetState (GameStates.GAME);
     }
 
     public void Restart () {

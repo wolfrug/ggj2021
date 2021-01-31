@@ -135,6 +135,8 @@ EXTERNAL ConsumeItem(x,y)
 {character:
 - George:
 #spawn.portrait.george
+- Player:
+#spawn.portrait.player
 }
 {UseText("CharacterName")}{character}#autoContinue
 
