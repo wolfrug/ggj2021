@@ -57,9 +57,15 @@ public class GameManager : MonoBehaviour {
     void Start () {
         currentState = gameStateDict[GameStates.INIT];
         gameStateDict[currentState.state].evtStart.Invoke (currentState);
+        Invoke ("FixTerribleBug", 1f);
+
     }
     public void Init () {
         NextState ();
+    }
+
+    void FixTerribleBug () {
+        SetState (GameStates.GAME);
     }
 
     public List<WanderingSpirit> Spirits {
