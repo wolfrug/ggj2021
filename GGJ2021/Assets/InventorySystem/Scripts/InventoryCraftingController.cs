@@ -56,10 +56,7 @@ public class InventoryCraftingController : MonoBehaviour {
         CheckCraftability (null, null);
 
         // Init-clear the display boxes
-        foreach (UI_ItemBox box in displayInventory) {
-            box.SetItemBoxData (null);
-            box.gameObject.SetActive (false);
-        }
+        ClearAllComponents ();
     }
 
     [NaughtyAttributes.Button]
@@ -82,43 +79,18 @@ public class InventoryCraftingController : MonoBehaviour {
             }
         }
         SetCraftingButtonActive (false);
-        CreateExampleCopy (null, -1);
+        //CreateExampleCopy (null, -1);
         targetBlueprint = null;
     }
     public void RemovedItem (InventoryController controller, Item_DragAndDrop item) {
         if (Active && UpdateCraftability) {
             RemoveComponentFromDisplay (item.targetBox.data);
-            RemoveItemFromDictionary (item, controller);
         }
     }
 
-    void AddItemToDictionary (Item_DragAndDrop item, InventoryController controller) {
-        if (controller != parentController) {
-            if (!allAddedItems.ContainsKey (item)) {
-                allAddedItems.Add (item, controller);
-            }
-        }
-    }
-    void RemoveItemFromDictionary (Item_DragAndDrop item, InventoryController controller) {
-        if (controller == null) {
-            if (allAddedItems.ContainsKey (item)) {
-                allAddedItems[item].TryTakeItem (item, null);
-                if (item.GetComponentInParent<InventoryController> () != parentController) {
-                    allAddedItems.Remove (item);
-                    Debug.LogWarning ("Successfully removed item from crafting inventory: " + item.name);
-                } else {
-                    Debug.LogWarning ("Item not removed safely from crafting inventory, oh no: " + item.name);
-                }
-            }
-        } else {
-            // Item was presumably removed natively
-            if (item.GetComponentInParent<InventoryController> () != parentController) {
-                allAddedItems.Remove (item);
-                Debug.LogWarning ("Successfully removed item from crafting inventory: " + item.name);
-            } else {
-                Debug.LogWarning ("Item not removed safely from crafting inventory, oh no." + item.name);
-            }
-        }
+    void ReturnItemToPlayerInventory (Item_DragAndDrop item) {
+        // Super ugly stuff incoming
+        GameManager.instance.playerInventory.TryTakeItemFromInventory (item, null);
     }
 
     void CreateExampleCopy (ItemData example, int amount) {
@@ -152,6 +124,12 @@ public class InventoryCraftingController : MonoBehaviour {
                 box.gameObject.SetActive (false);
                 return;
             }
+        }
+    }
+    void ClearAllComponents () {
+        foreach (UI_ItemBox box in displayInventory) {
+            box.SetItemBoxData (null);
+            box.gameObject.SetActive (false);
         }
     }
 
@@ -194,12 +172,20 @@ public class InventoryCraftingController : MonoBehaviour {
             success = parentController.AddItem (data.m_result, data.m_stackAmount);
             Debug.Log ("<color=green> Successfully crafted " + data.m_result.m_id + "</color>");
             itemCraftedEvent.Invoke (parentController, data);
+            ShowResultsPanel (true);
         }
         if (!success) {
             Debug.LogWarning ("<color=red>Failed to craft an object!</color>");
         }
         yield return null;
         crafting = null;
+    }
+    public void ShowResultsPanel (bool show) {
+        if (show) {
+            GetComponent<Animator> ().SetTrigger ("showResult");
+        } else {
+            GetComponent<Animator> ().SetTrigger ("hideResult");
+        }
     }
     public bool Active {
         get {
@@ -211,6 +197,10 @@ public class InventoryCraftingController : MonoBehaviour {
             SetVisible ();
             if (returnAllItemsOnClose) { // we also do this on start, just in case
                 ClearAllItemsFromInventory ();
+            }
+            ClearAllComponents ();
+            if (!value) {
+                ShowResultsPanel (false);
             }
         }
     }
@@ -229,8 +219,12 @@ public class InventoryCraftingController : MonoBehaviour {
     }
 
     void ClearAllItemsFromInventory () {
-        foreach (KeyValuePair<Item_DragAndDrop, InventoryController> kvp in allAddedItems) {
-            RemoveItemFromDictionary (kvp.Key, null);
+        List<Item_DragAndDrop> copyList = new List<Item_DragAndDrop> { };
+        foreach (Item_DragAndDrop item in parentController.allItemBoxes) {
+            copyList.Add (item);
+        }
+        foreach (Item_DragAndDrop item in copyList) {
+            ReturnItemToPlayerInventory (item);
         }
     }
 

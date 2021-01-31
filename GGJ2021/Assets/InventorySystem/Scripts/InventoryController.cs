@@ -443,7 +443,7 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
-    void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
+    public void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
         InventoryController targetObjectParent = item.GetComponentInParent<InventoryController> ();
         if (targetObjectParent == null) { // No parent? Floating magical lonely boy. Oh well, yoink.
             AddItemBox (item);

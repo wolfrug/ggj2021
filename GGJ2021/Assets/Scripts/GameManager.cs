@@ -168,6 +168,12 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void OpenJournal () {
+        if (!InkWriter.main.writerVisible) {
+            InkWriter.main.GoToKnot ("OpenJournalExt");
+        }
+    }
+
     public void StopPlayerMovement (bool stop) { // completly halt player movement
         if (player != null) {
             player.navMeshAgent.isStopped = stop;
