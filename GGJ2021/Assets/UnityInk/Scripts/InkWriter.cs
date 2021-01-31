@@ -67,6 +67,7 @@ public class InkWriter : MonoBehaviour {
     public bool clearOnNewStory = true;
     public bool clearAfterEveryChoice = false;
     public bool clearAfterEveryText = false;
+    public bool scrollToBottom = true;
     private bool continueStory = true;
     private bool autoContinueNext = false;
 
@@ -676,7 +677,7 @@ public class InkWriter : MonoBehaviour {
     }
 
     void Update () {
-        if (scrollView != null) {
+        if (scrollView != null && scrollToBottom) {
             if (scrollView.verticalNormalizedPosition > 0f && autoScroll) {
                 scrollView.verticalNormalizedPosition = -0.01f;
             } else if (scrollView.verticalNormalizedPosition <= 0f && autoScroll) {
@@ -718,7 +719,7 @@ public class InkWriter : MonoBehaviour {
             HideCanvas (true);
             returnValue = false;
             // Add the said text to the main content window!
-           // InkWriter.main.CreateContentView (lastText.Replace ("\n", "") + "\n\n", InkWriter.main.textArea.transform);
+            // InkWriter.main.CreateContentView (lastText.Replace ("\n", "") + "\n\n", InkWriter.main.textArea.transform);
             lastText = "";
         }
         if (tags.Contains ("characterCreationStart")) { // do not continue here, continue elsewhere!

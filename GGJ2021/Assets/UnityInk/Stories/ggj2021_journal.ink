@@ -48,42 +48,65 @@ VAR journal_last_open_tab = ->Journal.journal_1
 
 =journal_1
 <-navigation
-{UseText("journal_description")}Tab one
+{UseText("journal_description")}Notes ?
+
+// BEGINNING OF ENTRY
 + [Entry 1]
+->exampleJournalEntry->
 <-navigation
-Tab one text
 ++[Back]->journal_1
-// FINAL ENTRY
+// END OF ENTRY
+
+// BEGINNING OF ENTRY
++ {exampleJournalEntry>0}[Entry 2]
+<-navigation
+(Only appears conditionally! Wow). You can also write entries directly into the journal like this, but it makes things a bit messy. Just make sure to write them -under- the navigation back-arrow.
+++[Back]->journal_1
+// END OF ENTRY
+
+// FINAL ENTRY <- this just auto-sends the journal back to the start just in case.
 - ->journal_1
+// END OF TAB 1
 
 =journal_2
 <-navigation
-{UseText("journal_description")}Tab two
+{UseText("journal_description")}Hints ?
+
+// START OF ENTRY
 + [Entry 1]
 <-navigation
-Tab two text
+Maybe have hints here? I dunno.
 ++[Back]->journal_2
+// END OF ENTRY
+
 // FINAL ENTRY
 - ->journal_2
+// END OF TAB 2
 
 =journal_3
 <-navigation
-{UseText("journal_description")}Tab three
-+ [Entry 1]
+{UseText("journal_description")}Spells ?
+
+// START OF ENTRY
++ [Spell 1?]
+->anotherExample->
 <-navigation
-Tab three text
 ++[Back]->journal_3
+// END OF ENTRY
+
 // FINAL ENTRY
 - ->journal_3
+// END OF TAB 3
+
 
 =navigation
-+ [{UseButton("journal_1")}Tab 1]
++ [{UseButton("journal_1")}Notes]
 ~journal_last_open_tab = ->Journal.journal_1
 ->journal_1
-+ [{UseButton("journal_2")}Tab 2]
++ [{UseButton("journal_2")}Hints]
 ~journal_last_open_tab = ->Journal.journal_2
 ->journal_2
-+ [{UseButton("journal_3")}Tab 3]
++ [{UseButton("journal_3")}Spells]
 ~journal_last_open_tab = ->Journal.journal_3
 ->journal_3
 + [{UseButton("journal_quit")}X]
@@ -91,4 +114,13 @@ Tab three text
 
 =closeJournal
 {UseText("journal_description")} <br>
+->->
+
+
+==exampleJournalEntry
+This is the journal entry text, completely normal. It is what would appear after you click the button on the appropriate tab (button on right) - the text would be on the left. As a journal entry, we probably just want this to appear and take up all the space, so all you have to do is end it with a tunnel.
+->->
+
+==anotherExample
+Maybe your spell book could be filled in from the start? And have the hints like 'something soft, something hard, something wet' and so on? Up to you.
 ->->

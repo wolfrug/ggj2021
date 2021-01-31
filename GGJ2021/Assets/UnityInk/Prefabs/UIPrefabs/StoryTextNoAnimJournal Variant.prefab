@@ -129,6 +129,16 @@ PrefabInstance:
       propertyPath: m_fontColorGradient.bottomRight.b
       value: 0.8117648
       objectReference: {fileID: 0}
+    - target: {fileID: 2959468493913604720, guid: f9a1dccd9a3714c45ae556bebc70b3d4,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959468493913604720, guid: f9a1dccd9a3714c45ae556bebc70b3d4,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 4528234012156841977, guid: f9a1dccd9a3714c45ae556bebc70b3d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 5210176874860762562, guid: f9a1dccd9a3714c45ae556bebc70b3d4,
         type: 3}
       propertyPath: m_Name
-      value: StoryTextNoAnimJournal
+      value: StoryTextNoAnimJournal Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a1dccd9a3714c45ae556bebc70b3d4, type: 3}

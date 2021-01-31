@@ -3,7 +3,7 @@ INCLUDE ggj2021_journal.ink
 
 // Default main story object - always have a stitch named ==start
 {debug:
-->talkTest
+->OpenJournalInt
 }
 ==start
 ->DONE

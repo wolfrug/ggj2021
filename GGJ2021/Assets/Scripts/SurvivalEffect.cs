@@ -17,6 +17,7 @@ public class SurvivalEffect : MonoBehaviour { // spawn these to create damage-ov
     public float destroySelfTimeOut = 2f;
     public GenericHealthBar healthbarTarget;
     public TMPro.TextMeshProUGUI nameText;
+    public Animator animator;
     public EffectDone effectDone;
     // Start is called before the first frame update
     void Start () {
@@ -27,13 +28,20 @@ public class SurvivalEffect : MonoBehaviour { // spawn these to create damage-ov
         StartCoroutine (Effect ());
     }
     IEnumerator Effect () {
+        if (animator != null) {
+            animator.SetFloat ("Speed", 1f / timeLeft);
+        }
         while (active) {
             yield return null; // once a frame, like update
             if (timeLeft >= 0f) {
                 healthbarTarget.currentHealth = timeLeft;
                 if (countDown) {
                     timeLeft -= Time.deltaTime;
-                };
+                } else {
+                    if (animator != null) {
+                        animator.SetFloat ("Speed", 0f);
+                    }
+                }
                 SurvivalManager.instance.ChangeHealth (type, damagePerTick);
             } else { // effect done!
                 effectDone.Invoke (this);

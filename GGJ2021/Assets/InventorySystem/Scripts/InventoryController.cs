@@ -404,9 +404,11 @@ public class InventoryController : MonoBehaviour {
         if (targetItem != null) {
             if (draggedItem.targetBox.data == targetItem.targetBox.data) {
                 if (targetItem.targetBox.StackSize < targetItem.targetBox.data.m_maxStackSize) { // there's space!
-                    stackManipulator.StartManipulator (draggedItem, targetItem);
-                    return true;
-                };
+                    if (stackManipulator.CheckCompatibility (draggedItem)) {
+                        stackManipulator.StartManipulator (draggedItem, targetItem);
+                        return true;
+                    };
+                }
             } else {
                 //      Debug.Log ("Internal combination failed: incompatible data");
             }
@@ -421,8 +423,10 @@ public class InventoryController : MonoBehaviour {
         if (SpaceLeft > 0 || targetItem != null) {
             // Dragged item is external; if it has a stack size, let's let the player pick how much is dropped
             if (draggedItem.targetBox.StackSize > 1 || (draggedItem.targetBox.StackSize == 1 && targetItem != null)) {
-                stackManipulator.StartManipulator (draggedItem, targetItem);
-                return true;
+                if (stackManipulator.CheckCompatibility (draggedItem)) {
+                    stackManipulator.StartManipulator (draggedItem, targetItem);
+                    return true;
+                }
             }
         }
         return false;
