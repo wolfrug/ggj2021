@@ -105,10 +105,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void WinGame () {
+    public void WinGame () {
         GameState = GameStates.WIN;
         Debug.Log ("Victory!!");
-        //SceneManager.LoadScene("WinScene");
+        SceneManager.LoadScene ("WinScene");
     }
     public void Defeat () {
 
@@ -248,6 +248,19 @@ public class GameManager : MonoBehaviour {
         if (!playerInventory.DestroyItemAmount (data, amount)) {
             Debug.LogWarning ("Failed to destroy the required amount of item " + m_id + "(" + m_id + ")");
         }
+    }
+
+    public void HealPlayerHealth (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.HEALTH, 0.01f, amount);
+    }
+    public void HealPlayerMental (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.MENTAL, 0.01f, amount);
+    }
+    public void HurtPlayerHealth (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.HEALTH, -0.01f, amount);
+    }
+    public void HurtPlayerMental (float amount) {
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.MENTAL, -0.01f, amount);
     }
 
     public BasicAgent Player {

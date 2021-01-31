@@ -7,7 +7,7 @@ VAR checkItem = -1
 
 LIST characters = Player, George
 
-LIST items = Testitem1, Testitem2
+LIST items = Testitem1, Testitem2, WinItem
 
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
@@ -46,6 +46,8 @@ EXTERNAL ConsumeItem(x,y)
 ~returnVar = "test1"
 - Testitem2:
 ~returnVar = "test2"
+- WinItem:
+~returnVar = "ulti-soul-george"
 }
 // and return
 ~return returnVar

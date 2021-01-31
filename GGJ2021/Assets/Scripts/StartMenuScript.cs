@@ -10,20 +10,30 @@ public class StartMenuScript : MonoBehaviour {
     public string sceneToLoadOnStart = "Main2DScene";
 
     void Start () {
-        if (ES3.KeyExists ("LDJam47_HasSaved")) {
+        if (ES3.KeyExists ("GGJ2021_HasSaved") && resetButton != null) {
             resetButton.SetActive (true);
-        } else {
+        } else if (resetButton != null) {
             resetButton.SetActive (false);
         }
     }
+
+    public void ToMainMenu () {
+        SceneManager.LoadScene ("MainMenu");
+    }
     public void StartGame () {
-        SceneManager.LoadScene ("ManagersScene", LoadSceneMode.Additive);
-        SceneManager.LoadScene (sceneToLoadOnStart, LoadSceneMode.Additive);
+        StartCoroutine (UnloadSelf ());
+    }
+    IEnumerator UnloadSelf () {
+        yield return new WaitForSeconds (0.9f);
+        AsyncOperation load = SceneManager.LoadSceneAsync ("ManagersScene", LoadSceneMode.Additive);
+        AsyncOperation load2 = SceneManager.LoadSceneAsync (sceneToLoadOnStart, LoadSceneMode.Additive);
+        yield return load;
+        yield return load2;
+        SceneManager.UnloadSceneAsync ("MainMenu");
     }
     public void ResetAll () {
-        ES3.DeleteKey ("LDJam47_HasSaved");
-        ES3.DeleteKey ("LDJam47_CurrentLevel");
-        ES3.DeleteKey ("LDJam47_CurrentXP");
+        ES3.DeleteKey ("GGJ2021_HasSaved");
+        StartCoroutine (UnloadSelf ());
     }
     public void Quit () {
         Application.Quit ();

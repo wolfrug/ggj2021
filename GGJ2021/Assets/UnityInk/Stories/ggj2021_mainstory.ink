@@ -28,13 +28,22 @@ Testing inspection!
 ==talkTest
 
 You meet a dapper dude! Do we have the item he needs?
-{CheckItem(Testitem1, 1)>0:
-Yes we do, a total of {print_num(CheckItem(Testitem1, 1))} in stock! Let's eat some.
+{CheckItem(WinItem, 1)>0:
+Yes we do,
+
+a total of {print_num(CheckItem(WinItem, 1))} in stock! Let's eat some.
 ++ [Eat one.]->eatOne
+++ [Win game]->winGame
 - else:
 We do not, sadly.
 }
 - + [Let's just do the talk-test]->talk
+
+=winGame
+Ok this is the win game trigger. Thanks for playing!
+#winGame
+Boop.
+->DONE
 
 =eatOne
 {Consume(Testitem1, 1)}

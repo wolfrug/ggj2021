@@ -341,7 +341,10 @@ public class InventoryController : MonoBehaviour {
                 clicked = 0;
                 clicktime = 0;
                 contextMenuController.ForceSelectOption (ContextMenuEntryType.UI_DROP, target.gameObject.GetComponent<UI_ItemBox> ());
-            } else if (clicked > 2 || Time.time - clicktime > 1) clicked = 0;
+            } else if (clicked > 2 || Time.time - clicktime > 1) { clicked = 0; };
+            if (contextMenuController != null) {
+                contextMenuController.SelectItem (target.gameObject.GetComponent<UI_ItemBox> ()); // no let's not do this
+            }
         }
     }
 
@@ -349,6 +352,7 @@ public class InventoryController : MonoBehaviour {
         isDragging = true;
         // Debug.Log ("Started drag");
         target.transform.SetAsLastSibling ();
+        contextMenuController.Cancel ();
         mainCanvas.sortingOrder = 999;
     }
     void OnDragEnd (Item_DragAndDrop target) {
