@@ -65,9 +65,33 @@ public class GameManager : MonoBehaviour {
     public List<WanderingSpirit> Spirits {
         get {
             if (allSpirits.Count == 0) {
-                allSpirits.AddRange (FindObjectsOfType<WanderingSpirit> ());
+                foreach (WanderingSpirit spirit in FindObjectsOfType<WanderingSpirit> ()) {
+                    allSpirits.Add (spirit);
+                }
             }
             return allSpirits;
+        }
+    }
+
+    public void TriggerBanish (GameObject trg) {
+        WanderingSpirit trgSpirit = trg.GetComponent<WanderingSpirit> ();
+        if (trgSpirit != null) {
+            trgSpirit.Banish ();
+        }
+    }
+    public void SpellBanish () {
+        Debug.Log ("Attempting to banish all followers!");
+        foreach (WanderingSpirit spirit in Spirits) {
+            if (spirit.IsFollowing) {
+                Debug.Log ("Found follower, banishing " + spirit);
+                spirit.Banish ();
+            }
+        }
+    }
+    public void SpellInvisible () {
+        Debug.Log ("Making enemies forget you!");
+        foreach (WanderingSpirit spirit in Spirits) {
+            spirit.SetForgetPlayer (60f);
         }
     }
 

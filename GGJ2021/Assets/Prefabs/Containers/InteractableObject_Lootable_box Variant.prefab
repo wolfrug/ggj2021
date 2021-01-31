@@ -2127,6 +2127,12 @@ PrefabInstance:
       propertyPath: itemRemovedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3181207451220625129, guid: 2eebd8b793118fa438c680efaec4975a,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: fb6df28def5a0f74b9a86cad84849c7d,
+        type: 2}
     - target: {fileID: 3395441590912069309, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2155,7 +2161,7 @@ PrefabInstance:
     - target: {fileID: 3395441591791321637, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 3395441592072641138, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
@@ -2190,12 +2196,12 @@ PrefabInstance:
     - target: {fileID: 3395441592408993844, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3395441592408993844, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_Size
-      value: 0.7234086
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3579519648383144410, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
@@ -2370,6 +2376,11 @@ PrefabInstance:
     - target: {fileID: 3917859269556349087, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983099517278989689, guid: 2eebd8b793118fa438c680efaec4975a,
+        type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4216394786001592933, guid: 2eebd8b793118fa438c680efaec4975a,

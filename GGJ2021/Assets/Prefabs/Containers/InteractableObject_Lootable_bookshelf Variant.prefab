@@ -1800,17 +1800,17 @@ PrefabInstance:
     - target: {fileID: 1449340029297514393, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449340029297514393, guid: 2eebd8b793118fa438c680efaec4975a,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1449340029297514393, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449340029297514393, guid: 2eebd8b793118fa438c680efaec4975a,
+        type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1449340029297514393, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
@@ -2212,6 +2212,12 @@ PrefabInstance:
       propertyPath: itemRemovedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3181207451220625129, guid: 2eebd8b793118fa438c680efaec4975a,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: fb6df28def5a0f74b9a86cad84849c7d,
+        type: 2}
     - target: {fileID: 3385069144597137287, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3155,17 +3161,17 @@ PrefabInstance:
     - target: {fileID: 7114551605955275973, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7114551605955275973, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7114551605955275973, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7114551605955275973, guid: 2eebd8b793118fa438c680efaec4975a,
         type: 3}

@@ -5,9 +5,9 @@ VAR sayStarted = false
 
 VAR checkItem = -1
 
-LIST characters = Player, George
+LIST characters = Sadie, George, Ashley, Peter, Egroeg
 
-LIST items = Testitem1, Testitem2, WinItem
+LIST items = tool_knife, tool_scissors, tool_scissors_rust, tool_flashlight, tool_flashlight_off, tool_bottle, tool_box, tool_bells, tool_can, tool_honey, cons_bottle, cons_can, cons_gum, cons_sandwich, cons_mushroom, cons_sugar, cons_tea, ing_doll, ing_scarf, ing_ribbon, ing_candle, ing_tape, ing_lavender, ing_box, ing_pearl, ing_pipe, ing_photo, fuel_wood, fuel_battery, fuel_twigs, george_final
 
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
@@ -42,11 +42,67 @@ EXTERNAL ConsumeItem(x,y)
 // Add more items to this list as needed
 ~temp returnVar = ""
 {targetItem:
-- Testitem1:
-~returnVar = "test1"
-- Testitem2:
-~returnVar = "test2"
-- WinItem:
+- tool_knife:
+~returnVar = "tool-knife"
+- tool_scissors:
+~returnVar = "tool-scissors"
+- tool_scissors_rust:
+~returnVar = "tool-scissors_rust"
+- tool_flashlight:
+~returnVar = "tool-flashlight"
+- tool_flashlight_off:
+~returnVar = "tool-flashlight_off"
+- tool_bottle:
+~returnVar = "tool-bottle"
+- tool_box:
+~returnVar = "tool-box"
+- tool_bells:
+~returnVar = "tool-bells"
+- tool_can:
+~returnVar = "tool-can"
+- tool_honey:
+~returnVar = "tool-honey"
+- cons_bottle:
+~returnVar = "cons-bottle"
+- cons_can:
+~returnVar = "cons-can"
+- cons_gum:
+~returnVar = "cons-gum"
+- cons_sandwich:
+~returnVar = "cons-sandwich"
+- cons_mushroom:
+~returnVar = "cons-mushroom"
+- cons_sugar:
+~returnVar = "cons-sugar"
+- cons_tea:
+~returnVar = "cons-tea"
+- ing_doll:
+~returnVar = "ing-doll"
+- ing_scarf:
+~returnVar = "ing-scarf"
+- ing_ribbon:
+~returnVar = "ing-ribbon"
+- ing_candle:
+~returnVar = "ing-candle"
+- ing_tape:
+~returnVar = "ing-tape"
+- ing_lavender:
+~returnVar = "ing-lavender"
+- ing_box:
+~returnVar = "ing-box"
+- ing_pearl:
+~returnVar = "ing-pearl"
+- ing_pipe:
+~returnVar = "ing-pipe"
+- ing_photo:
+~returnVar = "ing-photo"
+- fuel_wood:
+~returnVar = "fuel-wood"
+- fuel_battery:
+~returnVar = "fuel-battery"
+- fuel_twigs:
+~returnVar = "fuel-twigs"
+- george_final:
 ~returnVar = "ulti-soul-george"
 }
 // and return
@@ -135,10 +191,16 @@ EXTERNAL ConsumeItem(x,y)
 #changeportrait
 
 {character:
+- Sadie:
+#spawn.portrait.sadie
 - George:
 #spawn.portrait.george
-- Player:
-#spawn.portrait.player
+- Ashley:
+#spawn.portrait.ashley
+- Peter:
+#spawn.portrait.peter
+- Egroeg:
+#spawn.portrait.Egroeg
 }
 {UseText("CharacterName")}{character}#autoContinue
 

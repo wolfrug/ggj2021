@@ -21,7 +21,7 @@ public class SimpleVisualInventory : MonoBehaviour { // hook up to an action wat
         if (targetController != null) {
             int itemCount = targetController.allItemBoxes.Count;
             if (shelfObjects.Count > itemCount) {
-                while (itemCount > 0 && shelfObjects.Count > 0 && shelfObjects.Count > itemCount) {
+                while (shelfObjects.Count > itemCount) {
                     TakeInventoryObject ();
                 }
             }

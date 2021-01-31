@@ -442,6 +442,7 @@ public class Interactable_Object : MonoBehaviour {
         };
     }
     bool IsCarried (bool byPlayer = true) {
+        return false;
         if (canBeCarried) {
             if (transform.parent != null) {
                 if (transform.parent.root == GameManager.instance.Player.transform && byPlayer) {

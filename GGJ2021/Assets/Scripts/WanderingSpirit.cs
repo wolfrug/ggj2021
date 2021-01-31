@@ -21,6 +21,7 @@ public class WanderingSpirit : MonoBehaviour {
     public bool randomWander = true;
     public float randomWanderDistance = 5f;
     public Transform randomWanderCenter;
+    public bool IsFollowing = false;
     public Vector2 randomWanderWaitTime = new Vector2 (0f, 5f);
     public float damagePerSecond;
     public bool followPlayer = true;
@@ -59,14 +60,26 @@ public class WanderingSpirit : MonoBehaviour {
         }
     }
 
+    public void Banish () {
+        if (randomWanderCenter != null) {
+            targetAgent.navMeshAgent.Warp (randomWanderCenter.position);
+        } else {
+            targetAgent.navMeshAgent.Warp (Vector3.zero);
+        }
+    }
+    public void TriggerBanish (GameObject obj) {
+        Banish ();
+    }
     public void SetForgetPlayer (float time) { // forgets the player (or any follow target) for x seconds
         SetFollowTarget (null);
         if (followPlayer) {
             CancelInvoke ("FollowPlayer");
+            followPlayer = false;
             Invoke ("FollowPlayer", time);
         }
     }
     void FollowPlayer () {
+        followPlayer = true;
         SetFollowTarget (GameManager.instance.Player.transform);
     }
 
@@ -79,12 +92,14 @@ public class WanderingSpirit : MonoBehaviour {
                 }
                 Vector3 randomPos = ((Vector3) Random.insideUnitCircle * randomWanderDistance) + (Vector3) randomWanderCenter.position;
                 targetAgent.navMeshAgent.SetDestination (randomPos);
+                IsFollowing = false;
                 randomWanderWaitTimeLeft = Random.Range (randomWanderWaitTime.x, randomWanderWaitTime.y);
             } else {
                 randomWanderWaitTimeLeft -= Time.deltaTime;
             }
         } else if (currentFollowTarget != null && Vector3.Distance (currentFollowTarget.position, transform.position) <= followDistance) {
             targetAgent.navMeshAgent.SetDestination (currentFollowTarget.position);
+            IsFollowing = true;
         }
     }
 }

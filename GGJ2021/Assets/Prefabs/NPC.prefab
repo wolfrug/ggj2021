@@ -32,9 +32,8 @@ GameObject:
   - component: {fileID: 9204961077655138275}
   - component: {fileID: 9204961077655138274}
   - component: {fileID: 9204961077655138273}
-  - component: {fileID: 9204961077655138272}
   m_Layer: 0
-  m_Name: Character
+  m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,21 +126,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9204961077655138272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9204961077655138078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveChildren: 0
-  componentsToSave:
-  - {fileID: 9204961077655138077}
 --- !u!1 &9204961078506378880
 GameObject:
   m_ObjectHideFlags: 0
