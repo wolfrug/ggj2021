@@ -3,7 +3,7 @@
     using UnityEngine;
 
     public class FMOD_MasterVolume : MonoBehaviour {
-        /*FMOD.Studio.EventInstance seTestEvent;
+        FMOD.Studio.EventInstance seTestEvent;
 
         public string masterBusPath = "bus:/Master";
         FMOD.Studio.Bus Master;
@@ -43,5 +43,5 @@
                 seTestEvent.start ();
             }
         }
-        */
+
     }

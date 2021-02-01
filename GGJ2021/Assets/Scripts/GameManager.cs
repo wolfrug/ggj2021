@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void FixTerribleBug () {
-        SetState (GameStates.GAME);
+        InkWriter.main.StartStory ();
     }
 
     public List<WanderingSpirit> Spirits {

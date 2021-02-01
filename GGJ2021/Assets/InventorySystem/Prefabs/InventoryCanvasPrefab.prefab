@@ -9788,42 +9788,42 @@ PrefabInstance:
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1570459556880481819, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
@@ -9841,6 +9841,11 @@ PrefabInstance:
       value: Tooltip_Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2861306192319234419, guid: bde297cdaa729ec4897eefbf46b8b114,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293834581313821888, guid: bde297cdaa729ec4897eefbf46b8b114,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9900,6 +9905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9170829412812296567, guid: cd21899d8e52bfd4ca77315dbf368e20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9170829412812296569, guid: cd21899d8e52bfd4ca77315dbf368e20,
         type: 3}

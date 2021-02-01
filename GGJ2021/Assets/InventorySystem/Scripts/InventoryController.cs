@@ -244,9 +244,6 @@ public class InventoryController : MonoBehaviour {
             newBox.targetBox.SetItemBoxData (itemdata);
             newBox.targetBox.StackSize = stackAmount;
             newBox.gameObject.name = itemdata.m_displayName + "_InventoryItem";
-            if (tooltipCanvas != null) {
-                newBox.targetBox.tooltip.spawnedTooltip = tooltipCanvas;
-            }
             return AddItemBox (newBox);
         } else {
             return false;
@@ -272,6 +269,9 @@ public class InventoryController : MonoBehaviour {
                 };
                 newItemBox.dragEnded.AddListener (OnDragEnd);
                 newItemBox.dragStarted.AddListener (OnDragStart);
+                if (tooltipCanvas != null) {
+                    newItemBox.targetBox.tooltip.tooltipCanvasParent = tooltipCanvas.transform;
+                }
                 newItemBox.UpdateInteractability ();
             }
             UpdateInventoryUI ();

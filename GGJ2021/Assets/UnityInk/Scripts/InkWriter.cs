@@ -97,9 +97,14 @@ public class InkWriter : MonoBehaviour {
 
         if (main == null && mainWriter) {
             main = this;
+            InitMain ();
         } else if (main != null && mainWriter) {
             Debug.LogWarning ("Cannot have two main inkWriters!");
         }
+    }
+    void InitMain () {
+        story = new Story (inkStoryObject.inkJsonAsset.text);
+        inkStoryObject.Init ();
     }
 
     void Start () {
@@ -130,8 +135,7 @@ public class InkWriter : MonoBehaviour {
 
         lastText = "";
         lastSaveableTags = "";
-        story = new Story (inkStoryObject.inkJsonAsset.text);
-        inkStoryObject.Init ();
+
         //string savedJson = PlayerPrefs.GetString(inkStoryObject.storyName + "savedInkStory");
         string savedJson = "";
         if (ES3.KeyExists (inkStoryObject.storyName + "_hasSaved")) {

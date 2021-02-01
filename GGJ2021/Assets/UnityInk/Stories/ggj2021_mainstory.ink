@@ -13,6 +13,7 @@ A lonely, wandering ghost. Ugh...
 ->firstGhost.talk
 }
 ==start
+->OpenJournalInt->
 Looks like the storm has abated. Hm...who's that by my fire? Ugh. Not another ghost.
 ->DONE
 

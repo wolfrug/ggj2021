@@ -103,6 +103,7 @@ MonoBehaviour:
   clearOnNewStory: 1
   clearAfterEveryChoice: 0
   clearAfterEveryText: 0
+  scrollToBottom: 1
   tagEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -237,7 +238,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2451850639766154931}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.00000012826347
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
