@@ -1938,6 +1938,11 @@ PrefabInstance:
       propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5630905762982594696, guid: b662f0387aec01047841ce7c287fe423,
+        type: 3}
+      propertyPath: activateDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5630905762982594697, guid: b662f0387aec01047841ce7c287fe423,
         type: 3}
       propertyPath: m_IsKinematic

@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour {
 
     public StudioEventEmitter sfxEmitter;
     public StudioEventEmitter musicEmitter;
-    
+
     [NaughtyAttributes.ReorderableList]
     public List<FMODSoundObject> eventRefs = new List<FMODSoundObject> { };
 
@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour {
     void Awake () {
         if (instance == null) {
             instance = this;
+            DontDestroyOnLoad (gameObject);
         } else {
             Destroy (gameObject);
         }
@@ -33,8 +34,8 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlaySFX (string id) {
-        sfxEmitter.Event = soundDict[id].fmodEvent;
-        sfxEmitter.Play ();
+        FMOD.Studio.EventInstance playerState = FMODUnity.RuntimeManager.CreateInstance (soundDict[id].fmodEvent);
+        playerState.start ();
     }
     public void PlayMusic (string id) {
         musicEmitter.Event = soundDict[id].fmodEvent;

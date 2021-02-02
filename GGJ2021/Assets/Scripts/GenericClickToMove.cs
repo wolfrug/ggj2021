@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class StartMove : UnityEvent<NavMeshAgent, Vector3> { }
@@ -13,6 +14,7 @@ public class FinishMove : UnityEvent<NavMeshAgent, Vector3> { }
 public class GenericClickToMove : MonoBehaviour {
     public Camera cam;
     public LayerMask layerMask;
+    public LayerMask ignoreMask;
     public bool hitEveryOtherLayer = false;
 
     public float distance = 100;
@@ -41,6 +43,24 @@ public class GenericClickToMove : MonoBehaviour {
          if (hitEveryOtherLayer) {
              targetLayer = ~layerMask;
          }*/
+        var pointerEventData = new PointerEventData (EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+        var raycastResults = new List<RaycastResult> ();
+        EventSystem.current.RaycastAll (pointerEventData, raycastResults);
+
+        if (raycastResults.Count > 0) {
+            Debug.LogWarning ("Hit UI, quitting.");
+            return;
+        }
+
+        int ignoreThis = ignoreMask;
+        RaycastHit hit2;
+
+        if (Physics.Raycast (cam.ScreenPointToRay (Input.mousePosition), out hit2, distance, ignoreThis)) {
+            Debug.LogWarning ("Hit an ignore layer, quitting");
+            return;
+        }
+
         int targetLayer = layerMask;
         RaycastHit hit;
 

@@ -25,6 +25,7 @@ public class WanderingSpirit : MonoBehaviour {
     public Vector2 randomWanderWaitTime = new Vector2 (0f, 5f);
     public float damagePerSecond;
     public bool followPlayer = true;
+    public ParticleSystem banishParticles;
     private float randomWanderWaitTimeLeft = 0f;
     //private BasicAgent player;
 
@@ -65,6 +66,9 @@ public class WanderingSpirit : MonoBehaviour {
             targetAgent.navMeshAgent.Warp (randomWanderCenter.position);
         } else {
             targetAgent.navMeshAgent.Warp (Vector3.zero);
+        }
+        if (banishParticles != null) {
+            banishParticles.Play ();
         }
     }
     public void TriggerBanish (GameObject obj) {

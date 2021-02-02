@@ -63,6 +63,7 @@ DO NOT READ >:-(
 
 // BEGINNING OF ENTRY
 + {firstGhost.talk>0}[Entry 2]
+->journalentry1->
 <-navigation
 //(Only appears conditionally! Wow). You can also write entries directly into the journal like this, but it makes things a bit messy. Just make sure to write them -under- the navigation back-arrow.
 ++[Back]->journal_1
@@ -220,7 +221,7 @@ I’ll take him for a walk around the neighbourhood and see if anything jogs his
 ===journalentry2
 Looks like we aren’t alone out here. There are spirits all over the place, and not all of them are friendly. Luckily I know how to handle myself. Still I should craft some protection spells, just in case.
 
-Meanwhile, the saga of ‘George the ghost’ continues. We’ve ended up in this dodgy old trailer park. The way he’s dressed I assumed he was from the nicer part of town. Just goes to show, you can’t judge a ghost by his perfectly waxed mustache...
+Meanwhile, the saga of ‘George the ghost’ continues. Dodgy neighbourhood. The way he’s dressed I assumed he was from the nicer part of town. Just goes to show, you can’t judge a ghost by his perfectly waxed mustache...
 
 I should look around and see if I can find this item of his. He said it’s small, and wooden, and has something to do with smoke, or smoking. 
 

@@ -215,9 +215,9 @@ public class GenericContextMenu : MonoBehaviour { // Add to regular Unity dropdo
         normalChildCount = contextMenuDropDown.transform.childCount;
         while (currentlyVisible) {
             yield return new WaitForSeconds (0.1f);
-            Debug.Log ("Current childcount: " + contextMenuDropDown.transform.childCount + " normal childcount: " + normalChildCount);
+            //Debug.Log ("Current childcount: " + contextMenuDropDown.transform.childCount + " normal childcount: " + normalChildCount);
             if (contextMenuDropDown.transform.childCount < normalChildCount) { // cancel event!!
-                Debug.Log ("Context Menu cancelled");
+              //  Debug.Log ("Context Menu cancelled");
                 ShowMenu (false);
             }
         };

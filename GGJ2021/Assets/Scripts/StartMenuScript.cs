@@ -25,10 +25,13 @@ public class StartMenuScript : MonoBehaviour {
     }
     IEnumerator UnloadSelf () {
         yield return new WaitForSeconds (0.9f);
-        AsyncOperation load = SceneManager.LoadSceneAsync ("ManagersScene", LoadSceneMode.Additive);
-        AsyncOperation load2 = SceneManager.LoadSceneAsync (sceneToLoadOnStart, LoadSceneMode.Additive);
-        yield return load;
+        AsyncOperation load2 = SceneManager.LoadSceneAsync ("ManagersScene", LoadSceneMode.Additive);
         yield return load2;
+        AsyncOperation load = SceneManager.LoadSceneAsync (sceneToLoadOnStart, LoadSceneMode.Additive); // load heavy scene first
+        yield return load;
+        // Game manager init
+        GameManager.instance.Init ();
+        // unload self
         SceneManager.UnloadSceneAsync ("MainMenu");
     }
     public void ResetAll () {

@@ -23,12 +23,14 @@ public enum GameStates {
 [System.Serializable]
 public class GameState {
     public GameStates state;
-    public GameStateEvent evtStart;
     public GameStates nextState;
+    public GameStateEvent evtStart;
+
 }
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
+    [NaughtyAttributes.ReorderableList]
     public GameState[] gameStates;
     [SerializeField]
     private GameState currentState;
@@ -55,13 +57,15 @@ public class GameManager : MonoBehaviour {
         }
     }
     void Start () {
-        currentState = gameStateDict[GameStates.INIT];
-        gameStateDict[currentState.state].evtStart.Invoke (currentState);
-        Invoke ("FixTerribleBug", 1f);
-
+        //Init() // uncomment if not going via mainmenu
+        //AudioManager.instance.PlayMusic ("MusicBG");
     }
+
+    [NaughtyAttributes.Button]
     public void Init () {
-        NextState ();
+        SetState (GameStates.INIT);
+        //Invoke ("FixTerribleBug", 1f);
+        //NextState ();
     }
 
     void FixTerribleBug () {
@@ -93,12 +97,14 @@ public class GameManager : MonoBehaviour {
                 spirit.Banish ();
             }
         }
+        AudioManager.instance.PlaySFX ("WitchBells1");
     }
     public void SpellInvisible () {
         Debug.Log ("Making enemies forget you!");
         foreach (WanderingSpirit spirit in Spirits) {
             spirit.SetForgetPlayer (60f);
         }
+        AudioManager.instance.PlaySFX ("WitchBells1");
     }
 
     void Late_Init () {
@@ -119,7 +125,9 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void SetState (GameStates state) {
-        GameState = state;
+        if (state != GameStates.NONE) {
+            GameState = state;
+        };
     }
     public GameStates GameState {
         get {
@@ -130,8 +138,12 @@ public class GameManager : MonoBehaviour {
             }
         }
         set {
+            Debug.Log ("Changing state to " + value);
             currentState = gameStateDict[value];
             currentState.evtStart.Invoke (currentState);
+            if (currentState.nextState != GameStates.NONE) {
+                SetState (currentState.nextState);
+            };
         }
     }
 
@@ -221,7 +233,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     void CloseInventory (InventoryController otherInventory) {
-        SetState (gameStateDict[GameStates.INVENTORY].nextState);
+
         //  Debug.Log ("Inventory closed " + otherInventory.gameObject);
         if (otherInventory.type == InventoryType.LOOTABLE) {
             playerInventory.Visible = false;
@@ -230,17 +242,36 @@ public class GameManager : MonoBehaviour {
             InventoryController.CloseAllInventories (InventoryType.LOOTABLE);
             InventoryController.CloseAllInventories (InventoryType.CRAFTING);
         }
+        if (InventoryController.GetAllInventories ().Count == 0 && GameState == GameStates.INVENTORY) {
+            SetState (GameStates.GAME);
+        }
     }
 
     public void OpenJournal () {
-        if (!InkWriter.main.writerVisible) {
+        if (GameState == GameStates.GAME) {
             InkWriter.main.GoToKnot ("OpenJournalExt");
+        }
+    }
+    public void OpenOwnInventory () {
+        if (GameState != GameStates.GAME) {
+            return;
+        } else {
+            playerInventory.Visible = true;
+            AudioManager.instance.PlaySFX ("ClickButton");
+        }
+    }
+    public void OpenCraftingInventory () {
+        if (GameState != GameStates.GAME) {
+            return;
+        } else {
+            InventoryController.GetInventoryOfType (InventoryType.CRAFTING, null, false).Visible = true;
+            AudioManager.instance.PlaySFX ("ClickButton");
         }
     }
 
     public void StopPlayerMovement (bool stop) { // completly halt player movement
-        if (player != null) {
-            player.navMeshAgent.isStopped = stop;
+        if (Player != null) {
+            Player.navMeshAgent.isStopped = stop;
         }
         mover.Activate (!stop);
     }
