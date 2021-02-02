@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     private BasicAgent player;
     public GenericClickToMove mover;
-    public InventoryController playerInventory;
+    private InventoryController m_playerInventory;
 
     public Transform respawnLocation;
 
@@ -216,9 +216,9 @@ public class GameManager : MonoBehaviour {
 
     public void InitInventoryEvents () {
         Debug.Log ("Attempting to init inventory events");
-        playerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
+        PlayerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
         foreach (InventoryController lootableInventory in InventoryController.GetAllInventories (InventoryType.NONE, null, false)) {
-            Debug.Log ("Adding events to " + InventoryController.GetAllInventories ().Count + " inventories");
+            Debug.Log ("Adding events to " + InventoryController.GetAllInventories (InventoryType.NONE, null, false).Count + " inventories");
             lootableInventory.inventoryOpenedEvent.AddListener (OpenInventory);
             lootableInventory.inventoryClosedEvent.AddListener (CloseInventory);
         }
@@ -229,14 +229,14 @@ public class GameManager : MonoBehaviour {
         SetState (GameStates.INVENTORY);
         Debug.Log ("Inventory opened " + otherInventory.gameObject);
         if (otherInventory.type == InventoryType.LOOTABLE || otherInventory.type == InventoryType.CRAFTING) { // auto-open player inventory when opening lootable container
-            playerInventory.Visible = true;
+            PlayerInventory.Visible = true;
         }
     }
     void CloseInventory (InventoryController otherInventory) {
 
         //  Debug.Log ("Inventory closed " + otherInventory.gameObject);
         if (otherInventory.type == InventoryType.LOOTABLE) {
-            playerInventory.Visible = false;
+            PlayerInventory.Visible = false;
         }
         if (otherInventory.type == InventoryType.PLAYER) {
             InventoryController.CloseAllInventories (InventoryType.LOOTABLE);
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour {
         if (GameState != GameStates.GAME) {
             return;
         } else {
-            playerInventory.Visible = true;
+            PlayerInventory.Visible = true;
             AudioManager.instance.PlaySFX ("ClickButton");
         }
     }
@@ -291,7 +291,7 @@ public class GameManager : MonoBehaviour {
             InkWriter.main.story.variablesState[(inkVariableName)] = -1;
             return;
         }
-        int returnVariable = playerInventory.CountItem (data);
+        int returnVariable = PlayerInventory.CountItem (data);
         InkWriter.main.story.variablesState[(inkVariableName)] = returnVariable;
     }
     public void Ink_ConsumeItem (object[] inputVariables) {
@@ -305,8 +305,8 @@ public class GameManager : MonoBehaviour {
             Debug.LogWarning ("No such item with ID" + m_id);
             return;
         }
-        int returnVariable = playerInventory.CountItem (data);
-        if (!playerInventory.DestroyItemAmount (data, amount)) {
+        int returnVariable = PlayerInventory.CountItem (data);
+        if (!PlayerInventory.DestroyItemAmount (data, amount)) {
             Debug.LogWarning ("Failed to destroy the required amount of item " + m_id + "(" + m_id + ")");
         }
     }
@@ -331,6 +331,17 @@ public class GameManager : MonoBehaviour {
                 mover.targetAgent = player.navMeshAgent;
             };
             return player;
+        }
+    }
+    public InventoryController PlayerInventory {
+        get {
+            if (m_playerInventory == null) {
+                m_playerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
+            }
+            return m_playerInventory;
+        }
+        set {
+            m_playerInventory = value;
         }
     }
 

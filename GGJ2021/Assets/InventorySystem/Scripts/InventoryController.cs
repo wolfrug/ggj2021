@@ -73,6 +73,8 @@ public class InventoryController : MonoBehaviour {
     }
 
     void Awake () {
+        // Set up inventory at start (and clears existing inventory)
+        InitInventory (data, clearOnStart);
         if (!allInventories.Contains (this)) {
             allInventories.Add (this);
         }
@@ -95,32 +97,6 @@ public class InventoryController : MonoBehaviour {
         }
         defaultSortOrder = mainCanvas.sortingOrder;
 
-        // Add all item boxes to the allItemBoxes list and add listeners to them
-        allItemBoxes.Clear ();
-        for (int i = 0; i < inventoryParent.childCount; i++) {
-            Transform child = inventoryParent.GetChild (i);
-            Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
-            if (tryGetBox != null) {
-                AddItemBox (tryGetBox);
-            }
-        }
-
-        // Set up inventory at start (and clears existing inventory)
-        InitInventory (data, clearOnStart);
-
-        // This is the 'backup' dragtarget, letting you just drag and drop into the inventory
-        if (mainDragTarget != null) {
-            mainDragTarget.dragCompletedEvent.AddListener (OnDragCompleted);
-        }
-        // Add listeners to stack manipulator onfinished
-        stackManipulator.combineFinishedEvent.AddListener (FinishCombineStackManipulation);
-        stackManipulator.splitFinishedEvent.AddListener (FinishSplitStackManipulation);
-        // Hide/unhide the inventory!
-        if (hideOnInit) {
-            HideInventory (true);
-        } else {
-            ShowInventory (true);
-        }
     }
 
     void LoadAllItemDatas () {
@@ -139,6 +115,29 @@ public class InventoryController : MonoBehaviour {
     }
 
     public void InitInventory (InventoryData newData, bool clearPrevious = false) {
+
+        // Add all item boxes to the allItemBoxes list and add listeners to them
+        allItemBoxes.Clear ();
+        for (int i = 0; i < inventoryParent.childCount; i++) {
+            Transform child = inventoryParent.GetChild (i);
+            Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
+            if (tryGetBox != null) {
+                AddItemBox (tryGetBox);
+            }
+        }
+        // This is the 'backup' dragtarget, letting you just drag and drop into the inventory
+        if (mainDragTarget != null) {
+            mainDragTarget.dragCompletedEvent.AddListener (OnDragCompleted);
+        }
+        // Add listeners to stack manipulator onfinished
+        stackManipulator.combineFinishedEvent.AddListener (FinishCombineStackManipulation);
+        stackManipulator.splitFinishedEvent.AddListener (FinishSplitStackManipulation);
+        // Hide/unhide the inventory!
+        if (hideOnInit) {
+            HideInventory (true, false);
+        } else {
+            ShowInventory (true, false);
+        }
 
         if (clearPrevious) {
             ClearInventory ();
@@ -202,7 +201,6 @@ public class InventoryController : MonoBehaviour {
             if (consumeWatcher != null) {
                 consumeWatcher.InitEngine ();
             }
-
         }
     }
 
@@ -569,7 +567,7 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
-    public void ShowInventory (bool force = false) {
+    public void ShowInventory (bool force = false, bool sendEvent = true) {
         // Fancy code for showing inventory, maybe some doozy control graphs
         if (!Visible || force) { // Only want to invoke event if actually hidden
             // canvasGroup.interactable = true;
@@ -607,10 +605,12 @@ public class InventoryController : MonoBehaviour {
 
             }
             m_isActive = true;
-            inventoryOpenedEvent.Invoke (this);
+            if (sendEvent) {
+                inventoryOpenedEvent.Invoke (this);
+            };
         };
     }
-    public void HideInventory (bool force = false) {
+    public void HideInventory (bool force = false, bool sendEvent = true) {
         // Fancy code for hiding inventory, maybe some doozy control graphs
         if (Visible || force) { // we don't want to invoke the event for this unless we're actually hidden
             //canvasGroup.interactable = false;
@@ -626,7 +626,9 @@ public class InventoryController : MonoBehaviour {
             if (craftingController != null) {
                 craftingController.Active = false;
             };
-            inventoryClosedEvent.Invoke (this);
+            if (sendEvent) {
+                inventoryClosedEvent.Invoke (this);
+            };
         };
     }
 

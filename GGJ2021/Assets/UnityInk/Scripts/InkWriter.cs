@@ -150,10 +150,12 @@ public class InkWriter : MonoBehaviour {
                 Debug.Log ("Tags at load point: " + lastSaveableTags);
                 loading = true;
             } else { // no saved json -> go to "start" knot
+                InkWriter.main.story.variablesState["debug"] = false;
                 if (mainWriter) { GoToKnot ("start"); };
             }
         } else { // no saved json -> go to "start" knot
             ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
+            InkWriter.main.story.variablesState["debug"] = false;
             if (mainWriter) { GoToKnot ("start"); };
         }
         InkWriter.main.story.variablesState["debug"] = false;

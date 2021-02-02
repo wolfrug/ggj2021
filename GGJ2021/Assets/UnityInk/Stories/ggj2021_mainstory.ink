@@ -1,6 +1,10 @@
 INCLUDE ggj2021_functions.ink
 INCLUDE ggj2021_journal.ink
 
+{debug:
+->start
+}
+
 ==inspectContainer
 Full of things I could use, I hope...
 ->DONE
@@ -9,11 +13,10 @@ A lonely, wandering ghost. Ugh...
 ->DONE
 ==inspectBonfire
 My fire. Keeps ghosts away and keeps my spirit up. Provided it's burning...
+->DONE
 
 // Default main story object - always have a stitch named ==start
-{debug:
-->firstGhost.talk
-}
+
 ==start
 ->OpenJournalInt->
 Looks like the storm has abated. Hm...who's that by my fire? Ugh. Not another ghost.

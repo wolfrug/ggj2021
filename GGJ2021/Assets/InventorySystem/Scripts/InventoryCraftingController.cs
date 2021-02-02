@@ -90,7 +90,7 @@ public class InventoryCraftingController : MonoBehaviour {
 
     void ReturnItemToPlayerInventory (Item_DragAndDrop item) {
         // Super ugly stuff incoming
-        GameManager.instance.playerInventory.TryTakeItemFromInventory (item, null);
+        GameManager.instance.PlayerInventory.TryTakeItemFromInventory (item, null);
     }
 
     void CreateExampleCopy (ItemData example, int amount) {
