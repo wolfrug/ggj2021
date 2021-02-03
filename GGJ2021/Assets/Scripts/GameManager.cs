@@ -64,12 +64,12 @@ public class GameManager : MonoBehaviour {
     [NaughtyAttributes.Button]
     public void Init () {
         SetState (GameStates.INIT);
-        //Invoke ("FixTerribleBug", 1f);
+        Invoke ("FixTerribleBug", 1f);
         //NextState ();
     }
 
     void FixTerribleBug () {
-        InkWriter.main.StartStory ();
+        InkWriter.main.HideCanvas (true);
     }
 
     public List<WanderingSpirit> Spirits {
@@ -219,6 +219,7 @@ public class GameManager : MonoBehaviour {
         PlayerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
         foreach (InventoryController lootableInventory in InventoryController.GetAllInventories (InventoryType.NONE, null, false)) {
             Debug.Log ("Adding events to " + InventoryController.GetAllInventories (InventoryType.NONE, null, false).Count + " inventories");
+            lootableInventory.InitInventory (lootableInventory.data, lootableInventory.clearOnStart);
             lootableInventory.inventoryOpenedEvent.AddListener (OpenInventory);
             lootableInventory.inventoryClosedEvent.AddListener (CloseInventory);
         }

@@ -60,11 +60,11 @@ public class InventoryController : MonoBehaviour {
     public InventoryItemAdded itemAddedEvent;
     public InventoryItemRemoved itemRemovedEvent;
 
-    void OnEnabled () {
+    /*void OnEnabled () {
         if (!allInventories.Contains (this)) {
             allInventories.Add (this);
         }
-    }
+    }*/
 
     void OnDestroyed () {
         if (allInventories.Contains (this)) {
@@ -74,7 +74,7 @@ public class InventoryController : MonoBehaviour {
 
     void Awake () {
         // Set up inventory at start (and clears existing inventory)
-        InitInventory (data, clearOnStart);
+        //InitInventory (data, clearOnStart);
         if (!allInventories.Contains (this)) {
             allInventories.Add (this);
         }
@@ -200,6 +200,10 @@ public class InventoryController : MonoBehaviour {
             // INIT ENGINE
             if (consumeWatcher != null) {
                 consumeWatcher.InitEngine ();
+            }
+            // INIT CRAFTING
+            if (craftingController != null) {
+                craftingController.Init ();
             }
         }
     }

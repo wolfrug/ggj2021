@@ -921,6 +921,11 @@ PrefabInstance:
       propertyPath: craftingController
       value: 
       objectReference: {fileID: 5642568336027181065}
+    - target: {fileID: 401664113618648475, guid: 5443a7594ef384d4aa2fd11e40f5993f,
+        type: 3}
+      propertyPath: type
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 401664113618648478, guid: 5443a7594ef384d4aa2fd11e40f5993f,
         type: 3}
       propertyPath: m_Name

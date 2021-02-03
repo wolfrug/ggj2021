@@ -42,6 +42,10 @@ public class InventoryCraftingController : MonoBehaviour {
     }
     // Start is called before the first frame update
     void Start () {
+
+    }
+
+    public void Init () {
         if (startOff) {
             Active = false;
         } else {
@@ -90,7 +94,11 @@ public class InventoryCraftingController : MonoBehaviour {
 
     void ReturnItemToPlayerInventory (Item_DragAndDrop item) {
         // Super ugly stuff incoming
-        GameManager.instance.PlayerInventory.TryTakeItemFromInventory (item, null);
+        if (GameManager.instance != null) {
+            if (item != null && GameManager.instance.PlayerInventory != null) {
+                GameManager.instance.PlayerInventory.TryTakeItemFromInventory (item, null);
+            };
+        };
     }
 
     void CreateExampleCopy (ItemData example, int amount) {
