@@ -203,7 +203,7 @@ public class InventoryCraftingController : MonoBehaviour {
             m_active = value;
             UpdateCraftability = value;
             SetVisible ();
-            if (returnAllItemsOnClose) { // we also do this on start, just in case
+            if (returnAllItemsOnClose && !value) { // we also do this on start, just in case
                 ClearAllItemsFromInventory ();
             }
             ClearAllComponents ();

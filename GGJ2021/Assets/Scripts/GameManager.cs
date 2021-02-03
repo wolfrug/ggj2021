@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void FixTerribleBug () {
-        InkWriter.main.HideCanvas (true);
+        InkWriter.main.StartStory ();
     }
 
     public List<WanderingSpirit> Spirits {
@@ -219,12 +219,16 @@ public class GameManager : MonoBehaviour {
         PlayerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
         foreach (InventoryController lootableInventory in InventoryController.GetAllInventories (InventoryType.NONE, null, false)) {
             Debug.Log ("Adding events to " + InventoryController.GetAllInventories (InventoryType.NONE, null, false).Count + " inventories");
+            Debug.Log ("Next inventory is: " + lootableInventory.name);
             lootableInventory.InitInventory (lootableInventory.data, lootableInventory.clearOnStart);
             lootableInventory.inventoryOpenedEvent.AddListener (OpenInventory);
             lootableInventory.inventoryClosedEvent.AddListener (CloseInventory);
         }
         // Also init looking for player lol
 
+    }
+    public void InitDoozy () {
+        Doozy.Engine.GameEventMessage.SendEvent ("InitDoozy");
     }
     void OpenInventory (InventoryController otherInventory) {
         SetState (GameStates.INVENTORY);

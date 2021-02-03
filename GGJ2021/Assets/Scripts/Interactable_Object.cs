@@ -441,6 +441,9 @@ public class Interactable_Object : MonoBehaviour {
             agent.ActivateAction (deactivateActionTrigger, 0.5f, true);
         };
     }
+    public void SetInternalActive (bool set) {
+        active = set;
+    }
     bool IsCarried (bool byPlayer = true) {
         return false;
         if (canBeCarried) {

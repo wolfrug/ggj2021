@@ -16,6 +16,7 @@ public class UI_ItemBox : MonoBehaviour {
     public Animator animator;
     private int m_stackAmount = 1;
     public bool draggable = true;
+    public bool consumable = true;
     public bool highlight = true;
 
     public bool stackable = true;
@@ -124,6 +125,11 @@ public class UI_ItemBox : MonoBehaviour {
                 case ItemTrait.DRAGGABLE:
                     {
                         SetDraggable (true);
+                        break;
+                    }
+                case ItemTrait.CONSUMABLE:
+                    {
+                        consumable = true;
                         break;
                     }
             }

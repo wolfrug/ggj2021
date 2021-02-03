@@ -105,6 +105,7 @@ public class InkWriter : MonoBehaviour {
     void InitMain () {
         story = new Story (inkStoryObject.inkJsonAsset.text);
         inkStoryObject.Init ();
+        InkWriter.main.story.variablesState["debug"] = false;
     }
 
     void Start () {
@@ -137,7 +138,7 @@ public class InkWriter : MonoBehaviour {
         lastSaveableTags = "";
 
         //string savedJson = PlayerPrefs.GetString(inkStoryObject.storyName + "savedInkStory");
-        string savedJson = "";
+        /*string savedJson = "";
         if (ES3.KeyExists (inkStoryObject.storyName + "_hasSaved")) {
             if (ES3.KeyExists (inkStoryObject.storyName + "savedInkStory")) {
                 savedJson = ES3.Load<string> (inkStoryObject.storyName + "savedInkStory");
@@ -157,8 +158,12 @@ public class InkWriter : MonoBehaviour {
             ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
             InkWriter.main.story.variablesState["debug"] = false;
             if (mainWriter) { GoToKnot ("start"); };
-        }
+        }*/
+        // ADDED THIS FOR TEST
         InkWriter.main.story.variablesState["debug"] = false;
+        if (mainWriter) { GoToKnot ("start"); };
+        // END TEST
+        
         RefreshView ();
     }
 

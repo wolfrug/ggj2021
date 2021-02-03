@@ -66,10 +66,14 @@ public class InventoryController : MonoBehaviour {
         }
     }*/
 
-    void OnDestroyed () {
+    void OnDestroy () {
         if (allInventories.Contains (this)) {
             allInventories.Remove (this);
         }
+        inventoryClosedEvent.RemoveAllListeners ();
+        inventoryOpenedEvent.RemoveAllListeners ();
+        itemAddedEvent.RemoveAllListeners ();
+        itemRemovedEvent.RemoveAllListeners ();
     }
 
     void Awake () {
@@ -118,13 +122,15 @@ public class InventoryController : MonoBehaviour {
 
         // Add all item boxes to the allItemBoxes list and add listeners to them
         allItemBoxes.Clear ();
-        for (int i = 0; i < inventoryParent.childCount; i++) {
-            Transform child = inventoryParent.GetChild (i);
-            Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
-            if (tryGetBox != null) {
-                AddItemBox (tryGetBox);
+        if (inventoryParent.childCount > 0) {
+            for (int i = 0; i < inventoryParent.childCount; i++) {
+                Transform child = inventoryParent.GetChild (i);
+                Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
+                if (tryGetBox != null) {
+                    AddItemBox (tryGetBox);
+                }
             }
-        }
+        };
         // This is the 'backup' dragtarget, letting you just drag and drop into the inventory
         if (mainDragTarget != null) {
             mainDragTarget.dragCompletedEvent.AddListener (OnDragCompleted);
@@ -132,12 +138,6 @@ public class InventoryController : MonoBehaviour {
         // Add listeners to stack manipulator onfinished
         stackManipulator.combineFinishedEvent.AddListener (FinishCombineStackManipulation);
         stackManipulator.splitFinishedEvent.AddListener (FinishSplitStackManipulation);
-        // Hide/unhide the inventory!
-        if (hideOnInit) {
-            HideInventory (true, false);
-        } else {
-            ShowInventory (true, false);
-        }
 
         if (clearPrevious) {
             ClearInventory ();
@@ -204,6 +204,13 @@ public class InventoryController : MonoBehaviour {
             // INIT CRAFTING
             if (craftingController != null) {
                 craftingController.Init ();
+            }
+
+            // Hide/unhide the inventory!
+            if (hideOnInit) {
+                HideInventory (true, false);
+            } else {
+                ShowInventory (true, false);
             }
         }
     }
@@ -464,13 +471,15 @@ public class InventoryController : MonoBehaviour {
             AddItemBox (item);
         } else {
             if (permittedItemSources.Contains (targetObjectParent.type)) { // permitted inventory type!
-                bool attemptTake = AddItemBox (item);
-                if (attemptTake) { // success! remove the box from the other inventory
-                    targetObjectParent.RemoveItemBox (item);
-                    SwitchPlacesInsideInventory (item, targetSlot);
-                    //Debug.Log (name + " stole item " + item.name + " successfully from " + targetObjectParent.name);
-                } else { // else we fail and just let it do whatever
-                    //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (no space)");
+                if (item.targetBox.draggable) { // can it be taken?
+                    bool attemptTake = AddItemBox (item);
+                    if (attemptTake) { // success! remove the box from the other inventory
+                        targetObjectParent.RemoveItemBox (item);
+                        SwitchPlacesInsideInventory (item, targetSlot);
+                        //Debug.Log (name + " stole item " + item.name + " successfully from " + targetObjectParent.name);
+                    } else { // else we fail and just let it do whatever
+                        //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (no space)");
+                    }
                 }
             } else {
                 //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (not permitted)");
