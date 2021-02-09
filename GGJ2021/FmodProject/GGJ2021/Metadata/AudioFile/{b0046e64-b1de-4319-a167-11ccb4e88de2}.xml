@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="AudioFile" id="{09b4a3af-cd7b-40a2-a076-2e430b1f57f2}">
+	<object class="AudioFile" id="{b0046e64-b1de-4319-a167-11ccb4e88de2}">
 		<property name="assetPath">
-			<value>MusicSeq4.wav</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>WitchFootstep3.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -14,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>15.118117913832199</value>
+			<value>0.16346938775510203</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{70617436-3fa1-4733-8299-b620c3e8437b}</destination>

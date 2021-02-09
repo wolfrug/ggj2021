@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{88208e31-ffdc-4584-ba66-65b7a19576d1}">
+		<property name="assetPath">
+			<value>WitchFootstep6.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.19399092970521542</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{70617436-3fa1-4733-8299-b620c3e8437b}</destination>
+		</relationship>
+	</object>
+</objects>
